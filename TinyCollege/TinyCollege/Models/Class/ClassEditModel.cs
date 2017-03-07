@@ -259,6 +259,7 @@ namespace TinyCollege.Models.Class
     {
         public ObservableCollection<string> DayList { get; } = new ObservableCollection<string>
         {
+            "All",
             "M",
             "T",
             "W",

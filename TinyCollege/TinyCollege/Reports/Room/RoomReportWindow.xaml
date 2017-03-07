@@ -26,29 +26,61 @@
                 Text="Filter Options" />
 
             <StackPanel Margin="5" Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox Margin="5" IsChecked="{Binding Path=IsByBuilding}" />
+                    <TextBlock
+                        Margin="5"
+                        VerticalAlignment="Bottom"
+                        FontSize="12"
+                        Style="{StaticResource TextInfoHeaderStyle}"
+                        Text="By Building:" />
+                </StackPanel>
+
+                <ComboBox
+                    x:Name="CmbBuilding"
+                    MinWidth="50"
+                    DisplayMemberPath="Model.BuildingName"
+                    ItemsSource="{Binding Path=BuildingModule, Source={StaticResource Locator}}"
+                    SelectedItem="{Binding Path=Building}"
+                    Visibility="{Binding Path=RoomModule.IsByBuilding, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=inverse, Source={StaticResource Locator}}" />
+            </StackPanel>
+
+            <StackPanel Margin="5" Orientation="Horizontal">
                 <TextBlock
                     Margin="5"
                     VerticalAlignment="Bottom"
                     FontSize="12"
                     Style="{StaticResource TextInfoHeaderStyle}"
-                    Text="By Building:" />
-                <ComboBox x:Name="CmbBuilding" MinWidth="50" />
+                    Text="By Day:" />
+
+                <ComboBox
+                    MinWidth="50"
+                    ItemsSource="{Binding Path=Schedule.DayList}"
+                    SelectedItem="{Binding Path=SelectedDay}"
+                    Visibility="{Binding Path=RoomModule.IsByBuilding, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=inverse, Source={StaticResource Locator}}" />
             </StackPanel>
 
             <StackPanel Margin="5">
-                <TextBlock
-                    Margin="5"
-                    FontSize="12"
-                    Style="{StaticResource TextInfoHeaderStyle}"
-                    Text="By Time" />
                 <StackPanel Orientation="Horizontal">
+                    <CheckBox Margin="5" IsChecked="{Binding Path=IsByTime}" />
+                    <TextBlock
+                        Margin="5,7,5,5"
+                        FontSize="12"
+                        Style="{StaticResource TextInfoHeaderStyle}"
+                        Text="By Time" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Visibility="{Binding Path=RoomModule.IsByTime, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=inverse, Source={StaticResource Locator}}">
                     <TextBlock
                         Margin="5"
                         VerticalAlignment="Bottom"
                         FontSize="12"
                         Style="{StaticResource TextInfoHeaderStyle}"
                         Text="From:" />
-                    <materialDesign:TimePicker x:Name="TpStart" MinWidth="50" />
+                    <materialDesign:TimePicker
+                        x:Name="TpStart"
+                        MinWidth="50"
+                        SelectedTime="{Binding Path=StartTime}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
@@ -58,7 +90,10 @@
                         FontSize="12"
                         Style="{StaticResource TextInfoHeaderStyle}"
                         Text="To:" />
-                    <materialDesign:TimePicker x:Name="TpEnd" MinWidth="50" />
+                    <materialDesign:TimePicker
+                        x:Name="TpEnd"
+                        MinWidth="50"
+                        SelectedTime="{Binding Path=EndTime}" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>

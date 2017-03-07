@@ -697,6 +697,7 @@
     <EmbeddedResource Include="Reports\Class\ClassListReportViewer.rdlc" />
     <EmbeddedResource Include="Reports\Course\ClassProfessorsReportViewer.rdlc" />
     <EmbeddedResource Include="Reports\Professor\ProfessorClassListReportViewer.rdlc" />
+    <EmbeddedResource Include="Reports\Room\RoomReportViewer.rdlc" />
     <EmbeddedResource Include="Reports\Student\StudentGradeReportViewer.rdlc" />
     <EmbeddedResource Include="Reports\Student\StudentRegistrationReportViewer.rdlc" />
     <None Include="DataAccess\Ef\EF.Reverse.POCO.Core.ttinclude" />
@@ -713,6 +714,7 @@
     <None Include="Properties\DataSources\TinyCollege.ReportDataModel.Course.CourseDataSetModel.datasource" />
     <None Include="Properties\DataSources\TinyCollege.ReportDataModel.Professor.ProfessorClassListDataSetModel.datasource" />
     <None Include="Properties\DataSources\TinyCollege.ReportDataModel.Professor.ProfessorClassStudentListDataSetModel.datasource" />
+    <None Include="Properties\DataSources\TinyCollege.ReportDataModel.Room.RoomDataSetModel.datasource" />
     <None Include="Properties\DataSources\TinyCollege.ReportDataModel.Student.StudentDataSetModel.datasource" />
     <None Include="Properties\DataSources\TinyCollege.ReportDataModel.Student.StudentGradeDataSetModel.datasource" />
     <None Include="Properties\DataSources\TinyCollege.ReportDataModel.Student.StudentRegistrationModel.datasource" />

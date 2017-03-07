@@ -14,6 +14,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using Nito.AsyncEx;
 using TinyCollege.DataAccess;
 using TinyCollege.Models.Room;
+using TinyCollege.Reports.Room;
 using TinyCollege.Views.Room;
 
 namespace TinyCollege.Modules
@@ -72,9 +73,32 @@ namespace TinyCollege.Modules
             }
         }
 
+        public bool IsByTime
+        {
+            get { return _isByTime; }
+            set
+            {
+                _isByTime = value; 
+                RaisePropertyChanged(nameof(IsByTime));
+            }
+        }
+
+        public bool IsByBuilding
+        {
+            get { return _isByBuilding; }
+            set
+            {
+                _isByBuilding = value; 
+                RaisePropertyChanged(nameof(IsByBuilding));
+            }
+        }
+
         public ICommand AddRoomCommand => new RelayCommand(AddRoomProc);
 
         private RoomAddingWindow _roomAddwindow;
+        private bool _isByTime;
+        private bool _isByBuilding;
+
         private void AddRoomProc()
         {
             NewRoom?.Dispose();
@@ -125,6 +149,16 @@ namespace TinyCollege.Modules
         private bool DeleteProcCondition()
         {
             return (SelectedRoom != null);
+        }
+
+        public ICommand PrintRoomReport => new RelayCommand(PrintRoomReportProc);
+
+        private RoomReportWindow _roomReportWindow;
+        private void PrintRoomReportProc()
+        {
+            _roomReportWindow = new RoomReportWindow();
+            _roomReportWindow.Owner = Application.Current.MainWindow;
+            _roomReportWindow.Show();
         }
 
         private async Task DeleteRoomProcAsync()

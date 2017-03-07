@@ -41,6 +41,17 @@
                     <Button
                         Margin="0,0,10,0"
                         Background="{DynamicResource SecondaryAccentBrush}"
+                        Command="{Binding Path=PrintRoomReport}">
+                        <Button.Content>
+                            <materialDesign:PackIcon
+                                Width="25"
+                                Height="25"
+                                Kind="Printer" />
+                        </Button.Content>
+                    </Button>
+                    <Button
+                        Margin="0,0,10,0"
+                        Background="{DynamicResource SecondaryAccentBrush}"
                         Command="{Binding Path=AddRoomCommand}">
                         <Button.Content>
                             <materialDesign:PackIcon
