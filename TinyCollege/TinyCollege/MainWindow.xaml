@@ -1,0 +1,451 @@
+﻿<Window
+    x:Class="TinyCollege.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:building="clr-namespace:TinyCollege.Views.Building"
+    xmlns:class="clr-namespace:TinyCollege.Views.Class"
+    xmlns:course="clr-namespace:TinyCollege.Views.Course"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:department="clr-namespace:TinyCollege.Views.Department"
+    xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
+    xmlns:local="clr-namespace:TinyCollege"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:professor="clr-namespace:TinyCollege.Views.Professor"
+    xmlns:room="clr-namespace:TinyCollege.Views.Room"
+    xmlns:school="clr-namespace:TinyCollege.Views.School"
+    xmlns:student="clr-namespace:TinyCollege.Views.Student"
+    Title="MainWindow"
+    Width="1366"
+    Height="720"
+    Background="WhiteSmoke"
+    FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+    TextElement.FontSize="14"
+    TextElement.FontWeight="Medium"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+
+        <Style
+            x:Key="MainTabControlStyle"
+            BasedOn="{StaticResource MaterialDesignTabablzControlStyle}"
+            TargetType="{x:Type dragablz:TabablzControl}" />
+
+    </Window.Resources>
+
+    <Grid>
+        <StackPanel>
+            <materialDesign:ColorZone Padding="10" Background="{DynamicResource PrimaryHueDarkBrush}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon
+                            Width="20"
+                            Height="20"
+                            Margin="0,0,10,0"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Kind="School" />
+                        <TextBlock
+                            Margin="0,0,10,0"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource TextHeaderStyle}"
+                            Text="Tiny College, Inc." />
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Column="1"
+                        Margin="0,0,10,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                        <Grid Margin="0,0,10,0">
+                            <Ellipse
+                                Width="30"
+                                Height="30"
+                                Fill="{DynamicResource SecondaryAccentBrush}" />
+                            <materialDesign:PackIcon
+                                Width="20"
+                                Height="20"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="White"
+                                Kind="FaceProfile" />
+                        </Grid>
+                        <TextBlock
+                            Margin="0,0,10,0"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource TextHeaderStyle}"
+                            Text="My Profile" />
+
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}">
+                            <Button.Content>
+                                <Grid>
+                                    <Ellipse
+                                        Width="30"
+                                        Height="30"
+                                        Fill="Red" />
+                                    <materialDesign:PackIcon
+                                        Width="20"
+                                        Height="20"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Kind="Logout" />
+                                </Grid>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:ColorZone>
+            <dragablz:TabablzControl
+                Height="645"
+                BorderThickness="0"
+                Style="{StaticResource MainTabControlStyle}">
+                <TabItem Header="Student">
+                    <Grid>
+                        <materialDesign:TransitioningContent
+                            Opacity="100"
+                            OpeningEffectsOffset="{materialDesign:IndexedItemOffsetMultiplier 0:0:0.01}"
+                            RunHint="IsVisibleChanged">
+                            <materialDesign:TransitioningContent.OpeningEffects>
+                                <materialDesign:TransitionEffect Kind="SlideInFromTop" />
+                                <materialDesign:TransitionEffect Kind="FadeIn" />
+                            </materialDesign:TransitioningContent.OpeningEffects>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <student:StudentListView Margin="10" />
+                                <GridSplitter
+                                    Grid.Column="1"
+                                    BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                                    BorderThickness="2" />
+                                <Grid Grid.Column="2">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Style="{StaticResource TextInfoHeaderStyle}"
+                                        Text="No Student Selected!"
+                                        Visibility="{Binding EnrollmentModule.SelectedStudent, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
+
+                                    <Grid Visibility="{Binding EnrollmentModule.SelectedStudent, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
+                                        <Grid>
+                                            <student:StudentModuleView Visibility="{Binding EnrollmentModule.SelectedStudent.IsEditing, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                            <student:EditStudentView Visibility="{Binding EnrollmentModule.SelectedStudent.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </materialDesign:TransitioningContent>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Professor">
+                    <Grid>
+                        <materialDesign:TransitioningContent
+                            Opacity="100"
+                            OpeningEffectsOffset="{materialDesign:IndexedItemOffsetMultiplier 0:0:0.01}"
+                            RunHint="IsVisibleChanged">
+                            <materialDesign:TransitioningContent.OpeningEffects>
+                                <materialDesign:TransitionEffect Kind="SlideInFromTop" />
+                                <materialDesign:TransitionEffect Kind="FadeIn" />
+                            </materialDesign:TransitioningContent.OpeningEffects>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <professor:ProfessorListView Margin="10" />
+                                <GridSplitter
+                                    Grid.Column="1"
+                                    BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                                    BorderThickness="2" />
+                                <Grid Grid.Column="2">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Style="{StaticResource TextInfoHeaderStyle}"
+                                        Text="No Student Selected!"
+                                        Visibility="{Binding ClassModule.SelectedProfessor, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
+
+                                    <Grid Visibility="{Binding ClassModule.SelectedProfessor, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
+                                        <Grid>
+                                            <professor:ProfessorModuleView Visibility="{Binding ClassModule.SelectedProfessor.IsEditing, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                            <professor:ProfessorEditView Visibility="{Binding ClassModule.SelectedProfessor.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </materialDesign:TransitioningContent>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Classes">
+                    <Grid>
+                        <materialDesign:TransitioningContent
+                            Opacity="100"
+                            OpeningEffectsOffset="{materialDesign:IndexedItemOffsetMultiplier 0:0:0.01}"
+                            RunHint="IsVisibleChanged">
+                            <materialDesign:TransitioningContent.OpeningEffects>
+                                <materialDesign:TransitionEffect Kind="SlideInFromTop" />
+                                <materialDesign:TransitionEffect Kind="FadeIn" />
+                            </materialDesign:TransitioningContent.OpeningEffects>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <class:ClassListView Margin="10" />
+                                <GridSplitter
+                                    Grid.Column="1"
+                                    BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                                    BorderThickness="2" />
+                                <Grid Grid.Column="2">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Style="{StaticResource TextInfoHeaderStyle}"
+                                        Text="No Student Selected!"
+                                        Visibility="{Binding ClassModule.SelectedModuleClass, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
+
+                                    <Grid Visibility="{Binding ClassModule.SelectedModuleClass, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
+                                        <Grid>
+                                            <class:ClassModuleView Visibility="{Binding ClassModule.SelectedModuleClass.IsEditing, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                            <class:EditClassWindow Margin="10" Visibility="{Binding ClassModule.SelectedModuleClass.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </materialDesign:TransitioningContent>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Course">
+                    <Grid>
+                        <materialDesign:TransitioningContent
+                            Opacity="100"
+                            OpeningEffectsOffset="{materialDesign:IndexedItemOffsetMultiplier 0:0:0.01}"
+                            RunHint="IsVisibleChanged">
+                            <materialDesign:TransitioningContent.OpeningEffects>
+                                <materialDesign:TransitionEffect Kind="SlideInFromTop" />
+                                <materialDesign:TransitionEffect Kind="FadeIn" />
+                            </materialDesign:TransitioningContent.OpeningEffects>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <course:CourseListView Margin="10" />
+                                <GridSplitter
+                                    Grid.Column="1"
+                                    BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                                    BorderThickness="2" />
+                                <Grid Grid.Column="2">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Style="{StaticResource TextInfoHeaderStyle}"
+                                        Text="No Student Selected!"
+                                        Visibility="{Binding CourseModule.SelecteCourse, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
+
+                                    <Grid Visibility="{Binding CourseModule.SelecteCourse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
+                                        <Grid>
+                                            <course:CourseModuleView Visibility="{Binding CourseModule.SelecteCourse.IsEditing, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                            <course:CourseEditInformationView Margin="10" Visibility="{Binding CourseModule.SelecteCourse.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </materialDesign:TransitioningContent>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Room">
+                    <Grid>
+                        <materialDesign:TransitioningContent
+                            Opacity="100"
+                            OpeningEffectsOffset="{materialDesign:IndexedItemOffsetMultiplier 0:0:0.01}"
+                            RunHint="IsVisibleChanged">
+                            <materialDesign:TransitioningContent.OpeningEffects>
+                                <materialDesign:TransitionEffect Kind="SlideInFromTop" />
+                                <materialDesign:TransitionEffect Kind="FadeIn" />
+                            </materialDesign:TransitioningContent.OpeningEffects>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <room:RoomListView Margin="10" />
+                                <GridSplitter
+                                    Grid.Column="1"
+                                    BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                                    BorderThickness="2" />
+                                <Grid Grid.Column="2">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Style="{StaticResource TextInfoHeaderStyle}"
+                                        Text="No Student Selected!"
+                                        Visibility="{Binding RoomModule.SelectedRoom, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
+
+                                    <Grid Visibility="{Binding RoomModule.SelectedRoom, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
+                                        <Grid>
+                                            <room:RoomModuleView Visibility="{Binding RoomModule.SelectedRoom.IsEditing, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                            <room:RoomEditInformationView Visibility="{Binding RoomModule.SelectedRoom.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </materialDesign:TransitioningContent>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Department">
+                    <Grid>
+                        <materialDesign:TransitioningContent
+                            Opacity="100"
+                            OpeningEffectsOffset="{materialDesign:IndexedItemOffsetMultiplier 0:0:0.01}"
+                            RunHint="IsVisibleChanged">
+                            <materialDesign:TransitioningContent.OpeningEffects>
+                                <materialDesign:TransitionEffect Kind="SlideInFromTop" />
+                                <materialDesign:TransitionEffect Kind="FadeIn" />
+                            </materialDesign:TransitioningContent.OpeningEffects>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <department:DepartmentListVIew Margin="10" />
+                                <GridSplitter
+                                    Grid.Column="1"
+                                    BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                                    BorderThickness="2" />
+                                <Grid Grid.Column="2">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Style="{StaticResource TextInfoHeaderStyle}"
+                                        Text="No Student Selected!"
+                                        Visibility="{Binding DepartmentModule.SelectedDepartment, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
+
+                                    <Grid Visibility="{Binding DepartmentModule.SelectedDepartment, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
+                                        <Grid>
+                                            <department:DepartmentModuleView Visibility="{Binding DepartmentModule.SelectedDepartment.IsEditing, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                            <department:DepartmentEditInformationView Visibility="{Binding DepartmentModule.SelectedDepartment.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </materialDesign:TransitioningContent>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Building">
+                    <Grid>
+                        <materialDesign:TransitioningContent
+                            Opacity="100"
+                            OpeningEffectsOffset="{materialDesign:IndexedItemOffsetMultiplier 0:0:0.01}"
+                            RunHint="IsVisibleChanged">
+                            <materialDesign:TransitioningContent.OpeningEffects>
+                                <materialDesign:TransitionEffect Kind="SlideInFromTop" />
+                                <materialDesign:TransitionEffect Kind="FadeIn" />
+                            </materialDesign:TransitioningContent.OpeningEffects>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <building:BuildingListView Margin="10" />
+                                <GridSplitter
+                                    Grid.Column="1"
+                                    BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                                    BorderThickness="2" />
+                                <Grid Grid.Column="2">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Style="{StaticResource TextInfoHeaderStyle}"
+                                        Text="No Student Selected!"
+                                        Visibility="{Binding BuildingModule.SelectedBuilding, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
+
+                                    <Grid Visibility="{Binding BuildingModule.SelectedBuilding, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
+                                        <Grid>
+                                            <building:BuildingModuleView Visibility="{Binding BuildingModule.SelectedBuilding.IsEditing, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                            <building:BuildingEditInformationForm Visibility="{Binding BuildingModule.SelectedBuilding.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </materialDesign:TransitioningContent>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="School">
+                    <Grid>
+                        <materialDesign:TransitioningContent
+                            Opacity="100"
+                            OpeningEffectsOffset="{materialDesign:IndexedItemOffsetMultiplier 0:0:0.01}"
+                            RunHint="IsVisibleChanged">
+                            <materialDesign:TransitioningContent.OpeningEffects>
+                                <materialDesign:TransitionEffect Kind="SlideInFromTop" />
+                                <materialDesign:TransitionEffect Kind="FadeIn" />
+                            </materialDesign:TransitioningContent.OpeningEffects>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <school:SchoolListView Margin="10" />
+                                <GridSplitter
+                                    Grid.Column="1"
+                                    BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                                    BorderThickness="2" />
+                                <Grid Grid.Column="2">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Style="{StaticResource TextInfoHeaderStyle}"
+                                        Text="No Student Selected!"
+                                        Visibility="{Binding SchoolModule.SelectedSchool, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
+
+                                    <Grid Visibility="{Binding SchoolModule.SelectedSchool, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
+                                        <Grid>
+                                            <school:SchoolModuleView Visibility="{Binding SchoolModule.SelectedSchool.IsEditing, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                            <school:SchoolEditInformationView Visibility="{Binding SchoolModule.SelectedSchool.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </materialDesign:TransitioningContent>
+                    </Grid>
+                </TabItem>
+            </dragablz:TabablzControl>
+        </StackPanel>
+    </Grid>
+</Window>
