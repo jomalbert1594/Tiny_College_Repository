@@ -18,6 +18,7 @@ using NewGoodReading.Helpers.ReportViewer;
 using TinyCollege.DataAccess;
 using TinyCollege.Models.Building;
 using TinyCollege.Models.Class;
+using TinyCollege.Models.Room;
 using TinyCollege.Modules;
 using TinyCollege.ReportDataModel.Professor;
 using TinyCollege.ReportDataModel.Room;
@@ -34,12 +35,11 @@ namespace TinyCollege.Reports.Room
         private static readonly IRepository _Repository = new EfRepository();
         private bool _isByTime;
         private string _selecteDay;
-        private TimeSpan _startTime;
-        private TimeSpan _endTime;
+        private DateTime _startTime;
+        private DateTime _endTime;
         private BuildingModel _building;
         private bool _isByBuilding;
-
-
+      
         public RoomReportWindow()
         {
             InitializeComponent();
@@ -47,10 +47,10 @@ namespace TinyCollege.Reports.Room
             _reportView.RefreshDataSourceCallback = UpdateDatasetSource;
             ReportContainer.Content = _reportView.ReportContent;
             Schedule = new Schedule();
+            CmbDay.ItemsSource = Schedule.DayList;
         }
 
         public Schedule Schedule { get; set; }
-
         public BuildingModel Building
         {
             get { return _building; }
@@ -58,6 +58,7 @@ namespace TinyCollege.Reports.Room
             {
                 _building = value;
                 _reportView.ReportContent.UpdateDataSource(UpdateDatasetSource());
+                OnPropertyChanged();
             }
         }
 
@@ -67,7 +68,8 @@ namespace TinyCollege.Reports.Room
             set
             {
                 _isByTime = value;
-                ViewModelLocatorStatic.Locator.RoomModule.IsByTime = _isByTime;
+                ViewModelLocatorStatic.Locator.RoomModule.IsByTime = _isByTime; 
+                OnPropertyChanged();          
             }
         }
 
@@ -78,7 +80,7 @@ namespace TinyCollege.Reports.Room
             {
                 _isByBuilding = value;
                 ViewModelLocatorStatic.Locator.RoomModule.IsByBuilding = _isByBuilding;
-                _reportView.ReportContent.UpdateDataSource(UpdateDatasetSource());
+                OnPropertyChanged();
             }
         }
 
@@ -92,11 +94,10 @@ namespace TinyCollege.Reports.Room
                 {
                     _reportView.ReportContent.UpdateDataSource(UpdateDatasetSource());
                 }
-                
             }
         }
 
-        public TimeSpan StartTime
+        public DateTime StartTime
         {
             get { return _startTime; }
             set
@@ -106,7 +107,7 @@ namespace TinyCollege.Reports.Room
             }
         }
 
-        public TimeSpan EndTime
+        public DateTime EndTime
         {
             get { return _endTime; }
             set
@@ -120,21 +121,26 @@ namespace TinyCollege.Reports.Room
         public IReadOnlyCollection<DataSetValuePair> UpdateDatasetSource()
         {
             var sources = new List<DataSetValuePair>();
-            var classes = ViewModelLocatorStatic.Locator.ClassModule.ClassList;
+            var classes = ViewModelLocatorStatic.Locator.ClassModule.ModuleClassList;
             var classcollection = new ObservableCollection<RoomDataSetModel>();
             var filteredclasses = new ObservableCollection<RoomDataSetModel>();
 
             foreach (var item in classes)
             {
                 var roommodel = new ClassModel(item.Model, _Repository);
-                roommodel.LoadRelatedInfo();
-                classcollection.Add(new RoomDataSetModel(roommodel));
+                var room = _Repository.Room.Get(r => r.RoomId == roommodel.Model.RoomId);
+                var building = _Repository.Building.Get(b => b.BuildingId == room.BuildingId);
+                roommodel.Room = new RoomModel(room, _Repository);
+                roommodel.Room.Building = new BuildingModel(building, _Repository);
+                var roomdataset = new RoomDataSetModel(roommodel);
+                classcollection.Add(roomdataset);
             }
 
             // filter classes by day
+
             try
             {
-                if (SelectedDay.Contains("All"))
+                if (!SelectedDay.Contains("All") && !string.IsNullOrWhiteSpace(SelectedDay))
                 {
                     var classrooms = _Repository.Class.GetRange(c => c.Day.Contains(SelectedDay));
 
@@ -149,26 +155,49 @@ namespace TinyCollege.Reports.Room
             }
             catch(Exception e) { }
 
+            // Filter classes by building
+            if (IsByBuilding)
+            {
+                try
+                {
+                    var classrooms = classcollection.Where(c => c.BuildingName.Contains(Building.Model.BuildingName.Trim()));
+                    foreach (var item in classrooms)
+                    {
+                        filteredclasses.Add(item);
+                    }
+                    classcollection = new ObservableCollection<RoomDataSetModel>(filteredclasses);
+                }
+                catch(Exception e) { }
+
+            }
+
             // filter classes by time
             if (IsByTime)
             {
                 foreach (var item in classcollection)
                 {
+                    var timestep = 0;
                     var timeinterval = StartTime.ToString("H:mm") + '-' + EndTime.ToString("H:mm");
-                    if (IsTimeInBetween(item.Time.Trim(), timeinterval.Trim()))
+                    var timeintervalcompared = item.Time.Split('\n').ToList();
+                    timeintervalcompared.Remove("");
+
+                    foreach (var timeitem in timeintervalcompared)
+                    {
+                        if (IsTimeInBetween(timeitem.Trim(),timeinterval.Trim()))
+                        {
+                            timestep++;
+                        }
+                    }
+
+                    if (timestep > 0)
                     {
                         filteredclasses.Add(item);
-                    }
+                    }                 
                 }
                 classcollection = new ObservableCollection<RoomDataSetModel>(filteredclasses);
             }
 
             // filter classes by building
-
-            if (IsByBuilding)
-            {
-                
-            }
 
             sources.Add(new DataSetValuePair("RoomDataSet", classcollection));
 
@@ -205,8 +234,6 @@ namespace TinyCollege.Reports.Room
                     && TimeSpan.Parse(timesobservable[1]) >= TimeSpan.Parse(timescomparedtoobservable[0])
                     && TimeSpan.Parse(timesobservable[1]) <= TimeSpan.Parse(timescomparedtoobservable[1]))))
                 return true;
-
-
             return false;
         }
 

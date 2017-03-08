@@ -37,12 +37,14 @@
 
                 <Button
                     Grid.Column="1"
-                    Background="{DynamicResource SecondaryAccentBrush}"
-                    Command="{Binding Path=SelectedProfessor.EditCommand}">
+                    Padding="0"
+                    Command="{Binding Path=SelectedProfessor.EditCommand}"
+                    Style="{DynamicResource MaterialDesignFlatButton}">
                     <Button.Content>
                         <materialDesign:PackIcon
                             Width="25"
                             Height="25"
+                            Foreground="{DynamicResource SecondaryAccentBrush}"
                             Kind="TooltipEdit" />
                     </Button.Content>
                 </Button>

@@ -42,24 +42,28 @@
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                     <Button
                         Margin="0,0,10,0"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=SaveStudentCommandAsync}">
+                        Padding="0"
+                        Command="{Binding Path=SaveStudentCommandAsync}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="ContentSave" />
                         </Button.Content>
                     </Button>
 
                     <Button
                         Margin="0,0,10,0"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=CanceStudentCommand}">
+                        Padding="0"
+                        Command="{Binding Path=CanceStudentCommand}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="BlockHelper" />
                         </Button.Content>
                     </Button>

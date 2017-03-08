@@ -16,10 +16,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <materialDesign:ColorZone
-            Margin="5"
-            Padding="5"
-            Background="{DynamicResource PrimaryHueMidBrush}">
+        <materialDesign:ColorZone Padding="5" Background="{DynamicResource PrimaryHueMidBrush}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -39,24 +36,28 @@
                     Orientation="Horizontal">
                     <Button
                         Margin="0,0,10,0"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=SaveCommand}">
+                        Padding="0"
+                        Command="{Binding Path=SaveCommand}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="ContentSave" />
                         </Button.Content>
                     </Button>
 
                     <Button
                         Margin="0,0,10,0"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=CancelCommand}">
+                        Padding="0"
+                        Command="{Binding Path=CancelCommand}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="BlockHelper" />
                         </Button.Content>
                     </Button>

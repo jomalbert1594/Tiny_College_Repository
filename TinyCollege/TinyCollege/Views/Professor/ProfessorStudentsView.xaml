@@ -42,24 +42,28 @@
                         Orientation="Horizontal">
                         <Button
                             Margin="0,0,10,0"
-                            Background="{DynamicResource SecondaryAccentBrush}"
-                            Command="{Binding Path=ClassModule.PrintClassStudentListCommand, Source={StaticResource Locator}}">
+                            Padding="0"
+                            Command="{Binding Path=ClassModule.PrintClassStudentListCommand, Source={StaticResource Locator}}"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
                             <Button.Content>
                                 <materialDesign:PackIcon
                                     Width="25"
                                     Height="25"
+                                    Foreground="{DynamicResource SecondaryAccentBrush}"
                                     Kind="Printer" />
                             </Button.Content>
                         </Button>
 
                         <Button
                             Margin="0,0,10,0"
-                            Background="{DynamicResource SecondaryAccentBrush}"
-                            Command="{Binding Path=ClassModule.CancelViewProfessorStudentsCommand, Source={StaticResource Locator}}">
+                            Padding="0"
+                            Command="{Binding Path=ClassModule.CancelViewProfessorStudentsCommand, Source={StaticResource Locator}}"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
                             <Button.Content>
                                 <materialDesign:PackIcon
                                     Width="25"
                                     Height="25"
+                                    Foreground="{DynamicResource SecondaryAccentBrush}"
                                     Kind="BlockHelper" />
                             </Button.Content>
                         </Button>

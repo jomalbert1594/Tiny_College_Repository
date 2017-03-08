@@ -24,6 +24,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox39</rd:DefaultName>
         <Top>0.17639cm</Top>
+        <Left>0.07938cm</Left>
         <Height>0.78521cm</Height>
         <Width>8.75174cm</Width>
         <Style>
@@ -40,22 +41,22 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.20896cm</Width>
+              <Width>2.73695cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.28833cm</Width>
+              <Width>3.29257cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.75268cm</Width>
+              <Width>2.14838cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.24083cm</Width>
+              <Width>2.52528cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.36229cm</Width>
+              <Width>3.61008cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.71979cm</Width>
+              <Width>2.48591cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -75,7 +76,6 @@
                               <Style>
                                 <FontFamily>Segoe</FontFamily>
                                 <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -90,6 +90,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -111,7 +112,6 @@
                               <Style>
                                 <FontFamily>Segoe</FontFamily>
                                 <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -126,6 +126,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -147,7 +148,6 @@
                               <Style>
                                 <FontFamily>Segoe</FontFamily>
                                 <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -162,6 +162,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -183,7 +184,6 @@
                               <Style>
                                 <FontFamily>Segoe</FontFamily>
                                 <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -198,6 +198,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -219,7 +220,6 @@
                               <Style>
                                 <FontFamily>Segoe</FontFamily>
                                 <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -234,6 +234,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -255,7 +256,6 @@
                               <Style>
                                 <FontFamily>Segoe</FontFamily>
                                 <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -270,6 +270,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -326,7 +327,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>BuildingName</rd:DefaultName>
@@ -356,7 +359,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>ClassCode</rd:DefaultName>
@@ -386,7 +391,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>ClassDescription</rd:DefaultName>
@@ -446,7 +453,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Day</rd:DefaultName>
@@ -488,9 +497,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>RoomDataSet</DataSetName>
-        <Top>1.13799cm</Top>
+        <Top>1.50841cm</Top>
+        <Left>0.65321cm</Left>
         <Height>1.2cm</Height>
-        <Width>12.57288cm</Width>
+        <Width>16.79918cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -516,10 +526,10 @@
       </BottomBorder>
     </Style>
   </Body>
-  <Width>6.61385in</Width>
+  <Width>7.02154in</Width>
   <Page>
     <PageHeader>
-      <Height>2.91042cm</Height>
+      <Height>3.70417cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -558,12 +568,42 @@
                 <TextAlign>Center</TextAlign>
               </Style>
             </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Tel. No., +62 (82) 221 2411 local 8201; Fax +63 (82) 226 4116</Value>
+                  <Style>
+                    <FontStyle>Normal</FontStyle>
+                    <FontFamily>Segoe</FontFamily>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>e-Mail: tinycollege@gmail,.com</Value>
+                  <Style>
+                    <FontStyle>Normal</FontStyle>
+                    <FontFamily>Segoe</FontFamily>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.46729cm</Top>
-          <Left>3.93711cm</Left>
-          <Height>1.60542cm</Height>
-          <Width>8.63578cm</Width>
+          <Left>3.77249cm</Left>
+          <Height>2.47841cm</Height>
+          <Width>10.62016cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -582,9 +622,42 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>2.54cm</Height>
+      <Height>1.42875cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox3">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Globals!PageNumber</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox3</rd:DefaultName>
+          <Top>0.60537cm</Top>
+          <Left>14.37856cm</Left>
+          <Height>0.6cm</Height>
+          <Width>2.5cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
       <Style>
         <Border>
           <Style>None</Style>
@@ -593,10 +666,10 @@
     </PageFooter>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
+    <LeftMargin>1cm</LeftMargin>
+    <RightMargin>1cm</RightMargin>
+    <TopMargin>1cm</TopMargin>
+    <BottomMargin>1cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>

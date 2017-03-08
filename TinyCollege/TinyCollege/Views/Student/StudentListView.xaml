@@ -37,13 +37,15 @@
                     <Button
                         Grid.Column="1"
                         Margin="0,0,10,0"
+                        Padding="0"
                         HorizontalAlignment="Right"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=AddStudentCommand}">
+                        Command="{Binding Path=AddStudentCommand}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="Plus" />
                         </Button.Content>
                     </Button>

@@ -311,7 +311,7 @@
                                     <Grid Visibility="{Binding RoomModule.SelectedRoom, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
                                         <Grid>
                                             <room:RoomModuleView Visibility="{Binding RoomModule.SelectedRoom.IsEditing, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
-                                            <room:RoomEditInformationView Visibility="{Binding RoomModule.SelectedRoom.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                            <room:RoomEditInformationView Margin="10" Visibility="{Binding RoomModule.SelectedRoom.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
                                         </Grid>
                                     </Grid>
                                 </Grid>

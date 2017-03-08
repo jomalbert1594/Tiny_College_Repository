@@ -39,23 +39,27 @@
                     Orientation="Horizontal">
                     <Button
                         Margin="0,0,10,0"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=AddSchoolCommand}">
+                        Padding="0"
+                        Command="{Binding Path=AddSchoolCommand}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="Plus" />
                         </Button.Content>
                     </Button>
                     <Button
                         Margin="0,0,10,0"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=DeleteSchoolCommmand}">
+                        Padding="0"
+                        Command="{Binding Path=DeleteSchoolCommmand}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="Delete" />
                         </Button.Content>
                     </Button>

@@ -9,12 +9,13 @@
     Title="Room Report Viewer"
     Width="650"
     Height="650"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
 
         <StackPanel>
@@ -22,17 +23,20 @@
                 Margin="5"
                 HorizontalAlignment="Center"
                 FontSize="12"
-                Style="{StaticResource TextInfoHeaderStyle}"
+                Style="{StaticResource TextInfoStyle}"
                 Text="Filter Options" />
 
             <StackPanel Margin="5" Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
-                    <CheckBox Margin="5" IsChecked="{Binding Path=IsByBuilding}" />
+                    <CheckBox
+                        Name="ChkBuilding"
+                        Margin="5"
+                        IsChecked="{Binding Path=IsByBuilding}" />
                     <TextBlock
                         Margin="5"
                         VerticalAlignment="Bottom"
                         FontSize="12"
-                        Style="{StaticResource TextInfoHeaderStyle}"
+                        Style="{StaticResource TextInfoStyle}"
                         Text="By Building:" />
                 </StackPanel>
 
@@ -40,8 +44,8 @@
                     x:Name="CmbBuilding"
                     MinWidth="50"
                     DisplayMemberPath="Model.BuildingName"
-                    ItemsSource="{Binding Path=BuildingModule, Source={StaticResource Locator}}"
-                    SelectedItem="{Binding Path=Building}"
+                    ItemsSource="{Binding Path=BuildingModule.BuildingList, Source={StaticResource Locator}}"
+                    SelectedItem="{Binding Path=Building, UpdateSourceTrigger=PropertyChanged}"
                     Visibility="{Binding Path=RoomModule.IsByBuilding, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=inverse, Source={StaticResource Locator}}" />
             </StackPanel>
 
@@ -50,50 +54,54 @@
                     Margin="5"
                     VerticalAlignment="Bottom"
                     FontSize="12"
-                    Style="{StaticResource TextInfoHeaderStyle}"
+                    Style="{StaticResource TextInfoStyle}"
                     Text="By Day:" />
 
                 <ComboBox
+                    Name="CmbDay"
                     MinWidth="50"
-                    ItemsSource="{Binding Path=Schedule.DayList}"
-                    SelectedItem="{Binding Path=SelectedDay}"
-                    Visibility="{Binding Path=RoomModule.IsByBuilding, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=inverse, Source={StaticResource Locator}}" />
+                    SelectedItem="{Binding Path=SelectedDay, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
 
             <StackPanel Margin="5">
                 <StackPanel Orientation="Horizontal">
-                    <CheckBox Margin="5" IsChecked="{Binding Path=IsByTime}" />
+                    <CheckBox
+                        Name="ChkTime"
+                        Margin="5"
+                        IsChecked="{Binding Path=IsByTime}" />
                     <TextBlock
                         Margin="5,7,5,5"
                         FontSize="12"
-                        Style="{StaticResource TextInfoHeaderStyle}"
+                        Style="{StaticResource TextInfoStyle}"
                         Text="By Time" />
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Visibility="{Binding Path=RoomModule.IsByTime, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=inverse, Source={StaticResource Locator}}">
-                    <TextBlock
-                        Margin="5"
-                        VerticalAlignment="Bottom"
-                        FontSize="12"
-                        Style="{StaticResource TextInfoHeaderStyle}"
-                        Text="From:" />
-                    <materialDesign:TimePicker
-                        x:Name="TpStart"
-                        MinWidth="50"
-                        SelectedTime="{Binding Path=StartTime}" />
-                </StackPanel>
-
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock
-                        Margin="5"
-                        VerticalAlignment="Bottom"
-                        FontSize="12"
-                        Style="{StaticResource TextInfoHeaderStyle}"
-                        Text="To:" />
-                    <materialDesign:TimePicker
-                        x:Name="TpEnd"
-                        MinWidth="50"
-                        SelectedTime="{Binding Path=EndTime}" />
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding Path=RoomModule.IsByTime, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=inverse, Source={StaticResource Locator}}">
+                        <TextBlock
+                            Margin="5"
+                            VerticalAlignment="Bottom"
+                            FontSize="12"
+                            Style="{StaticResource TextInfoStyle}"
+                            Text="From:" />
+                        <materialDesign:TimePicker
+                            Name="TpStart"
+                            MinWidth="50"
+                            SelectedTime="{Binding Path=StartTime, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding Path=RoomModule.IsByTime, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=inverse, Source={StaticResource Locator}}">
+                        <TextBlock
+                            Margin="5"
+                            VerticalAlignment="Bottom"
+                            FontSize="12"
+                            Style="{StaticResource TextInfoStyle}"
+                            Text="To:" />
+                        <materialDesign:TimePicker
+                            Name="TpEnd"
+                            MinWidth="50"
+                            SelectedTime="{Binding Path=EndTime, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

@@ -37,36 +37,42 @@
 
                     <Button
                         Margin="0,0,10,0"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=PrintStudentEnrollmentReport}">
+                        Padding="0"
+                        Command="{Binding Path=PrintStudentEnrollmentReport}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="Printer" />
                         </Button.Content>
                     </Button>
 
                     <Button
                         Margin="0,0,10,0"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=AddStudentEnrollmentCommand}">
+                        Padding="0"
+                        Command="{Binding Path=AddStudentEnrollmentCommand}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="Plus" />
                         </Button.Content>
                     </Button>
 
                     <Button
                         Margin="0,0,10,0"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=DeleteStudentEnrollmentCommand}">
+                        Padding="0"
+                        Command="{Binding Path=DeleteStudentEnrollmentCommand}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="Delete" />
                         </Button.Content>
                     </Button>

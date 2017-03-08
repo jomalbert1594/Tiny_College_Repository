@@ -43,24 +43,28 @@
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                     <Button
                         Margin="0,0,10,0"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=SaveProfCommand}">
+                        Padding="0"
+                        Command="{Binding Path=SaveProfCommand}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="ContentSave" />
                         </Button.Content>
                     </Button>
 
                     <Button
                         Margin="0,0,10,0"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=CancelProfCommand}">
+                        Padding="0"
+                        Command="{Binding Path=CancelProfCommand}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="BlockHelper" />
                         </Button.Content>
                     </Button>

@@ -33,11 +33,15 @@
                     Text="INFORMATION" />
 
                 <StackPanel Grid.Column="1" HorizontalAlignment="Right">
-                    <Button Background="{DynamicResource SecondaryAccentBrush}" Command="{Binding Path=EditCommand}">
+                    <Button
+                        Padding="0"
+                        Command="{Binding Path=EditCommand}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="TooltipEdit" />
                         </Button.Content>
                     </Button>

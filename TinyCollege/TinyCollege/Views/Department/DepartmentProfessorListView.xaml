@@ -39,11 +39,15 @@
                     Margin="20,0,0,0"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
-                    <Button Margin="0,0,10,0" Background="{DynamicResource SecondaryAccentBrush}">
+                    <Button
+                        Margin="0,0,10,0"
+                        Padding="0"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="Printer" />
                         </Button.Content>
                     </Button>

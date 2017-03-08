@@ -16,10 +16,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <materialDesign:ColorZone
-            Margin="5"
-            Padding="5"
-            Background="{DynamicResource PrimaryHueMidBrush}">
+        <materialDesign:ColorZone Padding="5" Background="{DynamicResource PrimaryHueMidBrush}">
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -40,34 +37,40 @@
                     Orientation="Horizontal">
                     <Button
                         Margin="0,0,10,0"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=PrintRoomReport}">
+                        Padding="0"
+                        Command="{Binding Path=PrintRoomReport}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="Printer" />
                         </Button.Content>
                     </Button>
                     <Button
                         Margin="0,0,10,0"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=AddRoomCommand}">
+                        Padding="0"
+                        Command="{Binding Path=AddRoomCommand}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="Plus" />
                         </Button.Content>
                     </Button>
                     <Button
                         Margin="0,0,10,0"
-                        Background="{DynamicResource SecondaryAccentBrush}"
-                        Command="{Binding Path=DeleteRoomCommand}">
+                        Padding="0"
+                        Command="{Binding Path=DeleteRoomCommand}"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
                         <Button.Content>
                             <materialDesign:PackIcon
                                 Width="25"
                                 Height="25"
+                                Foreground="{DynamicResource SecondaryAccentBrush}"
                                 Kind="Delete" />
                         </Button.Content>
                     </Button>
