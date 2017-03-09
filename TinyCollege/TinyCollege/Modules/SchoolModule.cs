@@ -98,15 +98,18 @@ namespace TinyCollege.Modules
                 try
                 {
                     var professormodel = ViewModelLocatorStatic.Locator.ProfessorModule.ProfessorList.FirstOrDefault(p => p.Model.ProfessorId == NewSchool.ProfessorId);
-                    if (professormodel.Department.Model.SchoolId != SelectedSchool.Model.SchoolId)
+                    if (professormodel != null)
                     {
-                        MessageBox.Show("The Department of the chosen Dean does not belong in this School!",
-                            "Add School Dean", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                        return;
+                        if (professormodel?.Department.Model.SchoolId != SelectedSchool.Model.SchoolId)
+                        {
+                            MessageBox.Show("The Department of the chosen Dean does not belong in this School!",
+                                "Add School Dean", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            return;
+                        }
+                        professormodel.Model = NewSchool.Professor.Model;
+                        professormodel.Model.IsSchoolHead = true;
+                        await _repository.Professor.UpdateAsync(professormodel.Model, CancellationToken.None);
                     }
-                    professormodel.Model = NewSchool.Professor.Model;
-                    professormodel.Model.IsSchoolHead = true;
-                    await _repository.Professor.UpdateAsync(professormodel.Model, CancellationToken.None);
                 }
                 catch (Exception e) { }
 
@@ -146,8 +149,13 @@ namespace TinyCollege.Modules
             try
             {
                 var professormodel = SelectedSchool.Professor.Model;
-                professormodel.IsSchoolHead = false;
-                await _repository.Professor.UpdateAsync(professormodel, CancellationToken.None);
+
+                if (professormodel != null)
+                {
+                    professormodel.IsSchoolHead = false;
+                    await _repository.Professor.UpdateAsync(professormodel, CancellationToken.None);
+                }
+
                 await _repository.School.RemoveAsync(SelectedSchool.Model, CancellationToken.None);
                 SchoolList.Remove(SelectedSchool);
             }

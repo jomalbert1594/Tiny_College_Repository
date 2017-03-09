@@ -79,7 +79,7 @@
             Grid.Row="1"
             Margin="5,5,5,0"
             Padding="10"
-            DataContext="{Binding Path=EditModel}">
+            DataContext="{Binding Path=NewSchool}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -193,7 +193,7 @@
         <StackPanel
             Grid.Row="2"
             Margin="5"
-            DataContext="{Binding Path=EditModel}">
+            DataContext="{Binding Path=NewSchool}">
 
             <DataGrid
                 Height="375"

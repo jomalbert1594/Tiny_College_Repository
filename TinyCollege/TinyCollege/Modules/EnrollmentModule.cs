@@ -119,6 +119,33 @@ namespace TinyCollege.Modules
 
         }
 
+        public ICommand DeleteStudentCommand => new RelayCommand(DeleteStudentProc, DeleteCondition);
+
+        private bool DeleteCondition()
+        {
+            return (SelectedStudent != null);
+        }
+
+        private async Task DeleteStudentProcAsync()
+        {
+            if (SelectedStudent == null) return;
+                try
+            {
+                await _repository.Student.RemoveAsync(SelectedStudent.Model, CancellationToken.None);
+                ViewModelLocatorStatic.Locator.StudentModule.StudentList.Remove(SelectedStudent);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Unable to Delete", "Delete Studient", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+
+        }
+
+        private async void DeleteStudentProc()
+        {
+            await DeleteStudentProcAsync();
+        }
+
         public ICommand SaveStudentEnrollmentCommand => new RelayCommand(SaveStudentEnrollmentProc, SaveStudentEnrollmentCondition);
 
         private bool SaveStudentEnrollmentCondition()

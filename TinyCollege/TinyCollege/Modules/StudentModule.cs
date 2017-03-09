@@ -32,22 +32,6 @@ namespace TinyCollege.Modules
         
         public ObservableCollection<StudentModel> StudentList { get; } = new ObservableCollection<StudentModel>();
 
-        private  StudentModel _selectedStudent;
-
-        public StudentModel SelectedStudent
-        {
-            get { return _selectedStudent; }
-            set
-            {
-                _selectedStudent = value;
-                if (value != null)
-                {
-                    _selectedStudent.LoadRelatedInfo();
-                }
-                RaisePropertyChanged(nameof(SelectedStudent));
-            }
-        }
-
         public INotifyTaskCompletion StudentLoading { get; private set; }
 
         private async Task LoadStudentAsync()
@@ -73,31 +57,6 @@ namespace TinyCollege.Modules
             }
         }
 
-        public ICommand DeleteStudentCommand => new RelayCommand(DeleteStudentProc, DeleteCondition);
-
-        private bool DeleteCondition()
-        {
-            return (SelectedStudent != null);
-        }
-
-        private async Task DeleteStudentProcAsync()
-        {
-            try
-            {
-                await _repository.Student.RemoveAsync(SelectedStudent.Model, CancellationToken.None);
-                StudentList.Remove(SelectedStudent);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Unable to Delete", "Delete Studient", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            }
-
-        }
-
-        private async void DeleteStudentProc()
-        {
-            await DeleteStudentProcAsync();
-        }
 
         public ICommand AddStudentCommand => new RelayCommand(AddStudenProc);
         private StudentAddingWindow _studentAddingWindow;

@@ -147,6 +147,34 @@ namespace TinyCollege.Modules
         }
 
 
+        public ICommand DeleteProfCommand => new RelayCommand(DeleteProfProc, DeleteProfCondition);
+
+        private bool DeleteProfCondition()
+        {
+            return (SelectedProfessor != null);
+        }
+
+        private async void DeleteProfProc()
+        {
+            await DeleteProfProcAsync();
+        }
+
+        private async Task DeleteProfProcAsync()
+        {
+            if (SelectedProfessor == null) return;
+
+            try
+            {
+                await _repository.Professor.RemoveAsync(SelectedProfessor.Model, CancellationToken.None);
+                ViewModelLocatorStatic.Locator.ProfessorModule.ProfessorList.Remove(SelectedProfessor);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Unable to Delete", "Delete Professor", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
         public ICommand PrintClassModuleCommand => new RelayCommand(PrintClassModuleProc);
 
         private ClassListReportWindow _classListReportWindow;

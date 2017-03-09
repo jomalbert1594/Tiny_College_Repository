@@ -34,21 +34,42 @@
                         Style="{StaticResource TextHeaderStyle}"
                         Text="STUDENTS" />
 
-                    <Button
+                    <StackPanel
                         Grid.Column="1"
-                        Margin="0,0,10,0"
-                        Padding="0"
                         HorizontalAlignment="Right"
-                        Command="{Binding Path=AddStudentCommand}"
-                        Style="{DynamicResource MaterialDesignFlatButton}">
-                        <Button.Content>
-                            <materialDesign:PackIcon
-                                Width="25"
-                                Height="25"
-                                Foreground="{DynamicResource SecondaryAccentBrush}"
-                                Kind="Plus" />
-                        </Button.Content>
-                    </Button>
+                        Orientation="Horizontal">
+
+                        <Button
+                            Margin="0,0,10,0"
+                            Padding="0"
+                            HorizontalAlignment="Right"
+                            Command="{Binding Path=AddStudentCommand}"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            <Button.Content>
+                                <materialDesign:PackIcon
+                                    Width="25"
+                                    Height="25"
+                                    Foreground="{DynamicResource SecondaryAccentBrush}"
+                                    Kind="Plus" />
+                            </Button.Content>
+                        </Button>
+
+                        <Button
+                            Margin="0,0,10,0"
+                            Padding="0"
+                            HorizontalAlignment="Right"
+                            Command="{Binding Path=EnrollmentModule.DeleteStudentCommand, Source={StaticResource Locator}}"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            <Button.Content>
+                                <materialDesign:PackIcon
+                                    Width="25"
+                                    Height="25"
+                                    Foreground="{DynamicResource SecondaryAccentBrush}"
+                                    Kind="Delete" />
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+
 
                 </Grid>
             </materialDesign:ColorZone>

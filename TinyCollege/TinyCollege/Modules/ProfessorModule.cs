@@ -29,17 +29,6 @@ namespace TinyCollege.Modules
         }
 
         public ObservableCollection<ProfessorModel> ProfessorList { get; } = new ObservableCollection<ProfessorModel>();
-        private ProfessorModel _selectedProfessor;
-
-        public ProfessorModel SelectedProfessor
-        {
-            get { return _selectedProfessor; }
-            set
-            {
-                _selectedProfessor = value;
-                RaisePropertyChanged(nameof(SelectedProfessor));
-            }
-        }
 
         public INotifyTaskCompletion ProfessorLoading { get; private set; }
 
@@ -121,31 +110,6 @@ namespace TinyCollege.Modules
             NewProfessor?.Dispose();
         }
 
-        public ICommand DeleteProfCommand => new RelayCommand(DeleteProfProc, DeleteProfCondition);
 
-        private bool DeleteProfCondition()
-        {
-            return (SelectedProfessor != null);
-        }
-
-        private async void DeleteProfProc()
-        {
-            await DeleteProfProcAsync();
-        }
-
-        private async Task DeleteProfProcAsync()
-        {
-            if(SelectedProfessor == null)return;
-
-            try
-            {
-                await _repository.Professor.RemoveAsync(SelectedProfessor.Model, CancellationToken.None);
-                ProfessorList.Remove(SelectedProfessor);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Unable to Delete", "Delete Professor", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
     }
 }

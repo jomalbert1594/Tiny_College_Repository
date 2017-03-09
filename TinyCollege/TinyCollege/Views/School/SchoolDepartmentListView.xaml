@@ -59,6 +59,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock
+                                Margin="15,0,0,0"
                                 HorizontalAlignment="Center"
                                 FontSize="10"
                                 Foreground="Black"
@@ -80,6 +81,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock
+                                Margin="15,0,0,0"
                                 HorizontalAlignment="Center"
                                 FontSize="10"
                                 Foreground="Black"
@@ -100,7 +102,7 @@
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Margin="15,0,0,0" Orientation="Horizontal">
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     FontSize="10"

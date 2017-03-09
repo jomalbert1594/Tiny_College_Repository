@@ -178,7 +178,7 @@
                                         FontSize="20"
                                         FontWeight="Bold"
                                         Style="{StaticResource TextInfoHeaderStyle}"
-                                        Text="No Student Selected!"
+                                        Text="No Professor Selected!"
                                         Visibility="{Binding ClassModule.SelectedProfessor, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
 
                                     <Grid Visibility="{Binding ClassModule.SelectedProfessor, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
@@ -220,7 +220,7 @@
                                         FontSize="20"
                                         FontWeight="Bold"
                                         Style="{StaticResource TextInfoHeaderStyle}"
-                                        Text="No Student Selected!"
+                                        Text="No Class Selected!"
                                         Visibility="{Binding ClassModule.SelectedModuleClass, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
 
                                     <Grid Visibility="{Binding ClassModule.SelectedModuleClass, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
@@ -263,7 +263,7 @@
                                         FontSize="20"
                                         FontWeight="Bold"
                                         Style="{StaticResource TextInfoHeaderStyle}"
-                                        Text="No Student Selected!"
+                                        Text="No Course Selected!"
                                         Visibility="{Binding CourseModule.SelecteCourse, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
 
                                     <Grid Visibility="{Binding CourseModule.SelecteCourse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
@@ -305,7 +305,7 @@
                                         FontSize="20"
                                         FontWeight="Bold"
                                         Style="{StaticResource TextInfoHeaderStyle}"
-                                        Text="No Student Selected!"
+                                        Text="No Room Selected!"
                                         Visibility="{Binding RoomModule.SelectedRoom, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
 
                                     <Grid Visibility="{Binding RoomModule.SelectedRoom, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
@@ -347,7 +347,7 @@
                                         FontSize="20"
                                         FontWeight="Bold"
                                         Style="{StaticResource TextInfoHeaderStyle}"
-                                        Text="No Student Selected!"
+                                        Text="No Department Selected!"
                                         Visibility="{Binding DepartmentModule.SelectedDepartment, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
 
                                     <Grid Visibility="{Binding DepartmentModule.SelectedDepartment, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
@@ -389,7 +389,7 @@
                                         FontSize="20"
                                         FontWeight="Bold"
                                         Style="{StaticResource TextInfoHeaderStyle}"
-                                        Text="No Student Selected!"
+                                        Text="No Building Selected!"
                                         Visibility="{Binding BuildingModule.SelectedBuilding, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
 
                                     <Grid Visibility="{Binding BuildingModule.SelectedBuilding, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
@@ -431,7 +431,7 @@
                                         FontSize="20"
                                         FontWeight="Bold"
                                         Style="{StaticResource TextInfoHeaderStyle}"
-                                        Text="No Student Selected!"
+                                        Text="No School Selected!"
                                         Visibility="{Binding SchoolModule.SelectedSchool, ConverterParameter=inverse, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}" />
 
                                     <Grid Visibility="{Binding SchoolModule.SelectedSchool, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
