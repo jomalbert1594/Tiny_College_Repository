@@ -353,7 +353,7 @@
                                     <Grid Visibility="{Binding DepartmentModule.SelectedDepartment, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
                                         <Grid>
                                             <department:DepartmentModuleView Visibility="{Binding DepartmentModule.SelectedDepartment.IsEditing, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
-                                            <department:DepartmentEditInformationView Visibility="{Binding DepartmentModule.SelectedDepartment.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                            <department:DepartmentEditInformationView Margin="10" Visibility="{Binding DepartmentModule.SelectedDepartment.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -395,7 +395,7 @@
                                     <Grid Visibility="{Binding BuildingModule.SelectedBuilding, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
                                         <Grid>
                                             <building:BuildingModuleView Visibility="{Binding BuildingModule.SelectedBuilding.IsEditing, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
-                                            <building:BuildingEditInformationForm Visibility="{Binding BuildingModule.SelectedBuilding.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                            <building:BuildingEditInformationForm Margin="10" Visibility="{Binding BuildingModule.SelectedBuilding.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -437,7 +437,7 @@
                                     <Grid Visibility="{Binding SchoolModule.SelectedSchool, Converter={StaticResource NullToVisibilityConverter}, Source={StaticResource Locator}}">
                                         <Grid>
                                             <school:SchoolModuleView Visibility="{Binding SchoolModule.SelectedSchool.IsEditing, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
-                                            <school:SchoolEditInformationView Visibility="{Binding SchoolModule.SelectedSchool.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
+                                            <school:SchoolEditInformationView Margin="10" Visibility="{Binding SchoolModule.SelectedSchool.IsEditing, ConverterParameter=inverse, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}" />
                                         </Grid>
                                     </Grid>
                                 </Grid>

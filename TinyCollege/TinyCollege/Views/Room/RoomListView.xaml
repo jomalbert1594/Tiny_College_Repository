@@ -87,8 +87,6 @@
             SelectedItem="{Binding Path=SelectedRoom}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-
-
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />

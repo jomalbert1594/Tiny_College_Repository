@@ -16,11 +16,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <materialDesign:ColorZone
-            Margin="5"
-            Padding="5"
-            Background="{DynamicResource PrimaryHueMidBrush}"
-            CornerRadius="5">
+        <materialDesign:ColorZone Padding="5" Background="{DynamicResource PrimaryHueMidBrush}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -29,8 +25,10 @@
 
                 <TextBlock
                     Margin="0,0,10,0"
+                    VerticalAlignment="Center"
+                    FontSize="12"
                     Style="{StaticResource TextHeaderStyle}"
-                    Text="EDIT INFORMATION" />
+                    Text="EDIT BUILDING" />
 
                 <StackPanel
                     Grid.Column="1"
@@ -67,24 +65,84 @@
             </Grid>
         </materialDesign:ColorZone>
 
-        <StackPanel
+        <materialDesign:Card
             Grid.Row="1"
-            Margin="5"
+            Margin="5,5,5,0"
+            Padding="10"
             DataContext="{Binding Path=EditModel}">
-            <TextBlock
-                Margin="10,10,10,0"
-                Style="{StaticResource TextInfoHeaderStyle}"
-                Text="Building Name" />
 
-            <TextBox Margin="10,10,10,0" Text="{Binding Path=BuildingName, UpdateSourceTrigger=PropertyChanged}" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-            <TextBlock
-                Margin="10,10,10,0"
-                Style="{StaticResource TextInfoHeaderStyle}"
-                Text="Location" />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <TextBox Margin="10,10,10,0" Text="{Binding Path=BuildingLocation, UpdateSourceTrigger=PropertyChanged}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-        </StackPanel>
+                    <materialDesign:PackIcon
+                        Width="35"
+                        Height="35"
+                        Margin="10,10,10,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource PrimaryHueMidBrush}"
+                        Kind="City" />
+
+                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                        <TextBox
+                            MinWidth="100"
+                            Margin="0,10,10,0"
+                            FontSize="12"
+                            Text="{Binding Path=BuildingName, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock
+                            FontSize="10"
+                            FontStyle="Italic"
+                            Style="{StaticResource TextInfoHeaderStyle}"
+                            Text="Building Name" />
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <materialDesign:PackIcon
+                        Width="35"
+                        Height="35"
+                        Margin="10,10,10,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource PrimaryHueMidBrush}"
+                        Kind="City" />
+
+                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                        <TextBox
+                            MinWidth="100"
+                            Margin="0,10,10,0"
+                            FontSize="12"
+                            Text="{Binding Path=BuildingLocation, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock
+                            FontSize="10"
+                            FontStyle="Italic"
+                            Style="{StaticResource TextInfoHeaderStyle}"
+                            Text="Location" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+        </materialDesign:Card>
     </Grid>
 </UserControl>

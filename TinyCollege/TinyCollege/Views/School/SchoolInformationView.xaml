@@ -16,11 +16,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <materialDesign:ColorZone
-            Margin="5"
-            Padding="5"
-            Background="{DynamicResource PrimaryHueMidBrush}"
-            CornerRadius="5">
+        <materialDesign:ColorZone Padding="5" Background="{DynamicResource PrimaryHueMidBrush}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -29,6 +25,8 @@
 
                 <TextBlock
                     Margin="0,0,10,0"
+                    VerticalAlignment="Center"
+                    FontSize="12"
                     Style="{StaticResource TextHeaderStyle}"
                     Text="INFORMATION" />
 
@@ -49,59 +47,120 @@
             </Grid>
         </materialDesign:ColorZone>
 
-        <StackPanel Grid.Row="1" Margin="5">
-            <TextBlock
-                Margin="10,10,10,0"
-                Style="{StaticResource TextInfoHeaderStyle}"
-                Text="School Name" />
+        <materialDesign:Card
+            Grid.Row="1"
+            Margin="5,5,5,0"
+            Padding="10">
 
-            <TextBlock
-                Margin="10,10,10,0"
-                Style="{StaticResource TextInfoStyle}"
-                Text="{Binding Path=Model.SchoolName}" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-            <TextBlock
-                Margin="10,10,10,0"
-                Style="{StaticResource TextInfoHeaderStyle}"
-                Text="Address" />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <TextBlock
-                Margin="10,10,10,0"
-                Style="{StaticResource TextInfoStyle}"
-                Text="{Binding Path=Model.SchoolAddress}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-            <TextBlock
-                Margin="10,10,10,0"
-                Style="{StaticResource TextInfoHeaderStyle}"
-                Text="Dean" />
+                    <materialDesign:PackIcon
+                        Width="35"
+                        Height="35"
+                        Margin="10,10,10,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource PrimaryHueMidBrush}"
+                        Kind="School" />
 
-            <StackPanel DataContext="{Binding Path=Professor}" Orientation="Horizontal">
+                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                        <TextBlock
+                            Margin="0,10,10,0"
+                            FontSize="12"
+                            Style="{StaticResource TextInfoStyle}"
+                            Text="{Binding Path=Model.SchoolName}" />
+                        <TextBlock
+                            FontSize="10"
+                            FontStyle="Italic"
+                            Style="{StaticResource TextInfoHeaderStyle}"
+                            Text="School Name" />
+                    </StackPanel>
+                </Grid>
 
-                <TextBlock
-                    Margin="10,10,10,0"
-                    Style="{StaticResource TextInfoStyle}"
-                    Text="{Binding Path=Model.ProfessorFamilyName}" />
-                <TextBlock
-                    Margin="10,10,10,0"
-                    Style="{StaticResource TextInfoStyle}"
-                    Text=", " />
-                <TextBlock
-                    Margin="10,10,10,0"
-                    Style="{StaticResource TextInfoStyle}"
-                    Text="{Binding Path=Model.ProfessorFirstName}" />
-                <TextBlock
-                    Margin="10,10,10,0"
-                    Style="{StaticResource TextInfoStyle}"
-                    Text=" " />
-                <TextBlock
-                    Margin="10,10,10,0"
-                    Style="{StaticResource TextInfoStyle}"
-                    Text="{Binding Path=Model.ProfessorMiddleName[0]}" />
-                <TextBlock
-                    Margin="10,10,10,0"
-                    Style="{StaticResource TextInfoStyle}"
-                    Text="." />
-            </StackPanel>
-        </StackPanel>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <materialDesign:PackIcon
+                        Width="35"
+                        Height="35"
+                        Margin="10,10,10,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource PrimaryHueMidBrush}"
+                        Kind="City" />
+
+                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                        <TextBlock
+                            Margin="0,10,10,0"
+                            FontSize="12"
+                            Style="{StaticResource TextInfoStyle}"
+                            Text="{Binding Path=Model.SchoolAddress}" />
+                        <TextBlock
+                            FontSize="10"
+                            FontStyle="Italic"
+                            Style="{StaticResource TextInfoHeaderStyle}"
+                            Text="Address" />
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <materialDesign:PackIcon
+                        Width="35"
+                        Height="35"
+                        Margin="10,10,10,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource PrimaryHueMidBrush}"
+                        Kind="Account" />
+
+                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                        <TextBlock
+                            Margin="0,10,10,0"
+                            DataContext="{Binding Path=Professor.Model}"
+                            FontSize="12"
+                            Style="{StaticResource TextInfoStyle}">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0}, {1} {2}.">
+                                    <Binding Path="ProfessorFamilyName" />
+                                    <Binding Path="ProfessorFirstName" />
+                                    <Binding Path="ProfessorMiddleName[0]" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock
+                            FontSize="10"
+                            FontStyle="Italic"
+                            Style="{StaticResource TextInfoHeaderStyle}"
+                            Text="Dean" />
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </UserControl>

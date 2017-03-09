@@ -16,11 +16,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <materialDesign:ColorZone
-            Margin="5"
-            Padding="5"
-            Background="{DynamicResource PrimaryHueMidBrush}"
-            CornerRadius="5">
+        <materialDesign:ColorZone Padding="5" Background="{DynamicResource PrimaryHueMidBrush}">
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -31,140 +27,121 @@
                 <TextBlock
                     Margin="0,0,10,0"
                     HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="12"
                     Style="{StaticResource TextHeaderStyle}"
-                    Text="DEPARTMENTS LIST" />
-
-                <StackPanel
-                    Grid.Column="1"
-                    Margin="20,0,0,0"
-                    HorizontalAlignment="Right"
-                    Orientation="Horizontal">
-                    <Button
-                        Margin="0,0,10,0"
-                        Padding="0"
-                        Style="{DynamicResource MaterialDesignFlatButton}">
-                        <Button.Content>
-                            <materialDesign:PackIcon
-                                Width="25"
-                                Height="25"
-                                Foreground="{DynamicResource SecondaryAccentBrush}"
-                                Kind="Printer" />
-                        </Button.Content>
-                    </Button>
-                </StackPanel>
+                    Text="DEPARTMENTS" />
             </Grid>
         </materialDesign:ColorZone>
 
-        <ListView
+        <DataGrid
             Grid.Row="1"
-            Height="265"
-            MaxHeight="300"
-            Margin="10"
-            Background="Transparent"
+            Height="375"
+            MaxHeight="375"
+            Margin="5"
+            VerticalAlignment="Top"
+            AutoGenerateColumns="False"
             BorderBrush="Transparent"
+            CellStyle="{DynamicResource DataGridStyle}"
+            HorizontalScrollBarVisibility="Auto"
             ItemsSource="{Binding Path=DepartmentList}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="100">
-                        <GridViewColumn.Header>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="100">
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="10"
+                            FontWeight="Bold"
+                            Foreground="Black"
+                            Style="{StaticResource TextInfoHeaderStyle}"
+                            Text="Department ID" />
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
                             <TextBlock
                                 HorizontalAlignment="Center"
                                 FontSize="10"
-                                FontWeight="Bold"
                                 Foreground="Black"
                                 Style="{StaticResource TextInfoHeaderStyle}"
-                                Text="Department ID" />
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
+                                Text="{Binding Path=Model.DepartmentId}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="10"
+                            FontWeight="Bold"
+                            Foreground="Black"
+                            Style="{StaticResource TextInfoHeaderStyle}"
+                            Text="Department Name" />
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="10"
+                                Foreground="Black"
+                                Style="{StaticResource TextInfoHeaderStyle}"
+                                Text="{Binding Path=Model.DepartmentName}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="200">
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="10"
+                            FontWeight="Bold"
+                            Foreground="Black"
+                            Style="{StaticResource TextInfoHeaderStyle}"
+                            Text="Name" />
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     FontSize="10"
                                     Foreground="Black"
                                     Style="{StaticResource TextInfoHeaderStyle}"
-                                    Text="{Binding Path=Model.DepartmentId}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                    <GridViewColumn Width="150">
-                        <GridViewColumn.Header>
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                                FontSize="10"
-                                FontWeight="Bold"
-                                Foreground="Black"
-                                Style="{StaticResource TextInfoHeaderStyle}"
-                                Text="Department Name" />
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
+                                    Text="{Binding Path=DepartmentHead.Model.ProfessorFamilyName}" />
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     FontSize="10"
                                     Foreground="Black"
                                     Style="{StaticResource TextInfoHeaderStyle}"
-                                    Text="{Binding Path=Model.DepartmentName}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                    <GridViewColumn Width="200">
-                        <GridViewColumn.Header>
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                                FontSize="10"
-                                FontWeight="Bold"
-                                Foreground="Black"
-                                Style="{StaticResource TextInfoHeaderStyle}"
-                                Text="Name" />
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        FontSize="10"
-                                        Foreground="Black"
-                                        Style="{StaticResource TextInfoHeaderStyle}"
-                                        Text="{Binding Path=DepartmentHead.Model.ProfessorFamilyName}" />
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        FontSize="10"
-                                        Foreground="Black"
-                                        Style="{StaticResource TextInfoHeaderStyle}"
-                                        Text=", " />
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        FontSize="10"
-                                        Foreground="Black"
-                                        Style="{StaticResource TextInfoHeaderStyle}"
-                                        Text="{Binding Path=DepartmentHead.Model.ProfessorFirstName}" />
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        FontSize="10"
-                                        Foreground="Black"
-                                        Style="{StaticResource TextInfoHeaderStyle}"
-                                        Text=" " />
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        FontSize="10"
-                                        Foreground="Black"
-                                        Style="{StaticResource TextInfoHeaderStyle}"
-                                        Text="{Binding Path=DepartmentHead.Model.ProfessorMiddleName[0]}" />
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        FontSize="10"
-                                        Foreground="Black"
-                                        Style="{StaticResource TextInfoHeaderStyle}"
-                                        Text="." />
-                                </StackPanel>
-
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+                                    Text=", " />
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    FontSize="10"
+                                    Foreground="Black"
+                                    Style="{StaticResource TextInfoHeaderStyle}"
+                                    Text="{Binding Path=DepartmentHead.Model.ProfessorFirstName}" />
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    FontSize="10"
+                                    Foreground="Black"
+                                    Style="{StaticResource TextInfoHeaderStyle}"
+                                    Text=" " />
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    FontSize="10"
+                                    Foreground="Black"
+                                    Style="{StaticResource TextInfoHeaderStyle}"
+                                    Text="{Binding Path=DepartmentHead.Model.ProfessorMiddleName[0]}" />
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    FontSize="10"
+                                    Foreground="Black"
+                                    Style="{StaticResource TextInfoHeaderStyle}"
+                                    Text="." />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

@@ -16,11 +16,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <materialDesign:ColorZone
-            Margin="5"
-            Padding="5"
-            Background="{DynamicResource PrimaryHueMidBrush}"
-            CornerRadius="5">
+        <materialDesign:ColorZone Padding="5" Background="{DynamicResource PrimaryHueMidBrush}">
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -30,6 +26,8 @@
 
                 <TextBlock
                     HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="12"
                     Style="{StaticResource TextHeaderStyle}"
                     Text="DEPARTMENT LIST" />
 
@@ -77,18 +75,39 @@
             SelectedItem="{Binding Path=SelectedDepartment}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <materialDesign:PackIcon
+                            Width="35"
+                            Height="35"
                             Margin="10,10,10,0"
-                            Foreground="Black"
-                            Style="{StaticResource TextInfoHeaderStyle}"
-                            Text="Department " />
-                        <TextBlock
-                            Margin="10,10,10,0"
-                            Foreground="Black"
-                            Style="{StaticResource TextInfoHeaderStyle}"
-                            Text="{Binding Path=Model.DepartmentId}" />
-                    </StackPanel>
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="{DynamicResource PrimaryHueMidBrush}"
+                            Kind="ChairSchool" />
+
+                        <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                            <TextBlock
+                                Margin="0,10,10,0"
+                                FontSize="12"
+                                Style="{StaticResource TextInfoStyle}">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}Department {0}">
+                                        <Binding Path="Model.DepartmentId" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <TextBlock
+                                FontSize="10"
+                                FontStyle="Italic"
+                                Style="{StaticResource TextInfoHeaderStyle}"
+                                Text="{Binding Path=Model.DepartmentName}" />
+                        </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

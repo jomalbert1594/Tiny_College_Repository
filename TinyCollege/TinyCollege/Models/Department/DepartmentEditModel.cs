@@ -89,6 +89,8 @@ namespace TinyCollege.Models.Department
             foreach (var school in schools)
             {
                 var schoolmodel = new SchoolModel(school, _Repository);
+                var professor = await _Repository.Professor.GetAsync(p => p.ProfessorId == schoolmodel.Model.ProfessorId, CancellationToken.None);
+                schoolmodel.Professor = new ProfessorModel(professor, _Repository);
                 SchoolList.Add(schoolmodel);
                 await Task.Delay(100);
             }
