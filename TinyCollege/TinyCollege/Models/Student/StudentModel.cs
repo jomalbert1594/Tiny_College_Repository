@@ -77,7 +77,12 @@ namespace TinyCollege.Models.Student
                 await _Repository.Enrollment.GetRangeAsync(e => e.StudentId == Model.StudentId, CancellationToken.None);
             foreach (var enrollment in enrollments)
             {
-                var grade = await _Repository.Grade.GetAsync(g => g.EnrollmentId == enrollment.EnrollmentId, CancellationToken.None);
+                var grade = new DataAccess.Ef.Grade();
+                try
+                {
+                    grade = await _Repository.Grade.GetAsync(g => g.EnrollmentId == enrollment.EnrollmentId, CancellationToken.None);
+                }
+                catch(Exception e) { }
                 var enrollmentmodel = new EnrollmentModel(enrollment, _Repository);
                 var grademodel = new GradeModel(grade, _Repository);
                 grademodel.LoadRelatedInfo();
