@@ -36,7 +36,7 @@ namespace TinyCollege.Models.Room
 
         private async Task LoadRelatedInfoAsync()
         {
-            var classes = await _Repository.Class.GetRangeAsync(c => c.RoomId == Model.RoomId, CancellationToken.None);
+            var classes = await Task.Run(() => _Repository.Class.GetRangeAsync(c => c.RoomId == Model.RoomId, CancellationToken.None));
             Classes.Clear();
             foreach (var item in classes)
             {
@@ -46,7 +46,7 @@ namespace TinyCollege.Models.Room
                 await Task.Delay(100);
             }
 
-            var building = await _Repository.Building.GetAsync(b => b.BuildingId == Model.BuildingId, CancellationToken.None);
+            var building = await Task.Run(() => _Repository.Building.GetAsync(b => b.BuildingId == Model.BuildingId, CancellationToken.None));
             Building = new BuildingModel(building, _Repository);
         }
 
@@ -90,7 +90,7 @@ namespace TinyCollege.Models.Room
             if (!EditModel.HasChanges) return;
             try
             {
-                await _Repository.Room.UpdateAsync(EditModel.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _Repository.Room.UpdateAsync(EditModel.ModelCopy, CancellationToken.None));
                 Model = EditModel.ModelCopy;
                 IsEditing = false;
             }

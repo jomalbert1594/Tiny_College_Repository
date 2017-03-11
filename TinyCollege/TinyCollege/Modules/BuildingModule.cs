@@ -33,7 +33,7 @@ namespace TinyCollege.Modules
 
         private async Task LoadBooksAsync()
         {
-            var buildings = await _repository.Building.GetRangeAsync(CancellationToken.None);
+            var buildings = await Task.Run(() => _repository.Building.GetRangeAsync(CancellationToken.None));
             foreach (var building in buildings)
             {
                 var buildingmodel = new BuildingModel(building, _repository);
@@ -96,7 +96,7 @@ namespace TinyCollege.Modules
             if (!NewBuilding.HasChanges) return;
             try
             {
-                await _repository.Building.AddAsync(NewBuilding.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _repository.Building.AddAsync(NewBuilding.ModelCopy, CancellationToken.None));
                 BuildingList.Add(new BuildingModel(NewBuilding.ModelCopy, _repository));
                 _addBuildingWin.Close();
             }
@@ -131,7 +131,7 @@ namespace TinyCollege.Modules
             if (SelectedBuilding == null) return;
             try
             {
-                await _repository.Building.RemoveAsync(SelectedBuilding.Model, CancellationToken.None);
+                await Task.Run(() => _repository.Building.RemoveAsync(SelectedBuilding.Model, CancellationToken.None));
                 BuildingList.Remove(SelectedBuilding);
             }
             catch (Exception e)

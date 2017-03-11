@@ -61,7 +61,7 @@ namespace TinyCollege.Modules
 
         private async Task LoadDepartments()
         {
-            var departments = await _repository.Department.GetRangeAsync();
+            var departments = await Task.Run(() => _repository.Department.GetRangeAsync());
             foreach (var department in departments)
             {
                 var departmentmodel = new DepartmentModel(department, _repository);
@@ -106,7 +106,7 @@ namespace TinyCollege.Modules
             if (!NewDepartment.HasChanges) return;
             try
             {
-                var professor = await _repository.Professor.GetAsync(p => p.ProfessorId == NewDepartment.ProfessorId, CancellationToken.None);
+                var professor = await Task.Run(() => _repository.Professor.GetAsync(p => p.ProfessorId == NewDepartment.ProfessorId, CancellationToken.None));
                 var professorModel = ViewModelLocatorStatic.Locator.ProfessorModule.ProfessorList.FirstOrDefault(p => p.Model.ProfessorId == professor.ProfessorId);
                 ProfessorEditModel = new ProfessorEditModel(professor)
                 {
@@ -115,8 +115,8 @@ namespace TinyCollege.Modules
                     IsSchoolHead = false
                 };
                 professorModel.Model = ProfessorEditModel.ModelCopy;
-                await _repository.Professor.UpdateAsync(ProfessorEditModel.ModelCopy, CancellationToken.None);
-                await _repository.Department.AddAsync(NewDepartment.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _repository.Professor.UpdateAsync(ProfessorEditModel.ModelCopy, CancellationToken.None));
+                await Task.Run(() => _repository.Department.AddAsync(NewDepartment.ModelCopy, CancellationToken.None));
                 DepartmentList.Add(new DepartmentModel(NewDepartment.ModelCopy, _repository));
                 _addDeptWindow.Close();
             }
@@ -142,7 +142,7 @@ namespace TinyCollege.Modules
         {
             try
             {
-                await _repository.Department.RemoveAsync(SelectedDepartment.Model, CancellationToken.None);
+                await Task.Run(() => _repository.Department.RemoveAsync(SelectedDepartment.Model, CancellationToken.None));
                 DepartmentList.Remove(SelectedDepartment);
             }
             catch (Exception e)

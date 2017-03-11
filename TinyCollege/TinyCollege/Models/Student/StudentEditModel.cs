@@ -198,7 +198,7 @@ namespace TinyCollege.Models.Student
 
         private async Task LoadDepartmentAsync()
         {
-            var departments = await _Repository.Department.GetRangeAsync(CancellationToken.None);
+            var departments = await Task.Run(() => _Repository.Department.GetRangeAsync(CancellationToken.None)); 
 
             foreach (var department in departments)
             {

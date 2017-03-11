@@ -64,8 +64,7 @@ namespace TinyCollege.Models.Student
 
         private async Task LoadDepartmentAsync()
         {
-            var department =
-                await _Repository.Department.GetAsync(d => d.DepartmentId == Model.DepartmentId, CancellationToken.None);
+            var department = await Task.Run(() => _Repository.Department.GetAsync(d => d.DepartmentId == Model.DepartmentId, CancellationToken.None));
             Department = new DepartmentModel(department, _Repository);
         }
 
@@ -73,14 +72,14 @@ namespace TinyCollege.Models.Student
         {
             Enrollments.Clear();
             Grades.Clear();
-            var enrollments =
-                await _Repository.Enrollment.GetRangeAsync(e => e.StudentId == Model.StudentId, CancellationToken.None);
+            var enrollments = await Task.Run(() => _Repository.Enrollment.GetRangeAsync(e => e.StudentId == Model.StudentId,CancellationToken.None));
+
             foreach (var enrollment in enrollments)
             {
                 var grade = new DataAccess.Ef.Grade();
                 try
                 {
-                    grade = await _Repository.Grade.GetAsync(g => g.EnrollmentId == enrollment.EnrollmentId, CancellationToken.None);
+                    grade = await Task.Run(() => _Repository.Grade.GetAsync(g => g.EnrollmentId == enrollment.EnrollmentId, CancellationToken.None)); 
                 }
                 catch(Exception e) { }
                 var enrollmentmodel = new EnrollmentModel(enrollment, _Repository);

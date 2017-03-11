@@ -132,14 +132,14 @@ namespace TinyCollege.Models.Class
 
         private async Task LoadRelatedInfoAsync()
         {
-            var rooms = await _Repository.Room.GetRangeAsync(CancellationToken.None);
+            var rooms = await Task.Run(() => _Repository.Room.GetRangeAsync(CancellationToken.None));
             foreach (var room in rooms)
             {
                 RoomList.Add(new RoomModel(room, _Repository));
                 await Task.Delay(100);
             }
 
-            var courses = await _Repository.Course.GetRangeAsync(CancellationToken.None);
+            var courses = await Task.Run(() => _Repository.Course.GetRangeAsync(CancellationToken.None));
 
             foreach (var course in courses)
             {

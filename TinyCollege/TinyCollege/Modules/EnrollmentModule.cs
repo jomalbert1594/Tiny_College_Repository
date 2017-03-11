@@ -130,8 +130,8 @@ namespace TinyCollege.Modules
         {
             if (SelectedStudent == null) return;
                 try
-            {
-                await _repository.Student.RemoveAsync(SelectedStudent.Model, CancellationToken.None);
+                {
+                    await Task.Run(() => _repository.Student.RemoveAsync(SelectedStudent.Model, CancellationToken.None));
                 ViewModelLocatorStatic.Locator.StudentModule.StudentList.Remove(SelectedStudent);
             }
             catch (Exception e)
@@ -199,11 +199,12 @@ namespace TinyCollege.Modules
                 StudentEditModel.Units = StudentEditModel.Units + SelectedClass.Course.Model.CourseUnits;
                 enrollment.LoadRelatedInfo();
 
-                await _repository.Student.UpdateAsync(StudentEditModel.ModelCopy, CancellationToken.None);
+                await
+                    Task.Run(() => _repository.Student.UpdateAsync(StudentEditModel.ModelCopy, CancellationToken.None));
                 SelectedStudent.Model = StudentEditModel.ModelCopy;
-                await _repository.Enrollment.AddAsync(NewEnrollment.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _repository.Enrollment.AddAsync(NewEnrollment.ModelCopy, CancellationToken.None));
                 var newgrademodel = new GradeNewModel {EnrollmentId = NewEnrollment.ModelCopy.EnrollmentId};
-                await _repository.Grade.AddAsync(newgrademodel.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _repository.Grade.AddAsync(newgrademodel.ModelCopy, CancellationToken.None));
                 var grademodel = new GradeModel(newgrademodel.ModelCopy, _repository);
                 grademodel.LoadRelatedInfo();
                 SelectedStudent.Grades.Add(grademodel);
@@ -354,10 +355,10 @@ namespace TinyCollege.Modules
             var grademodel = SelectedStudent.Grades.FirstOrDefault(g => g.Model.EnrollmentId == SelectedEnrollment.Model.EnrollmentId);
             SelectedStudent.Grades.Remove(grademodel);
             StudentEditModel.Units = StudentEditModel.Units - SelectedEnrollment.Class.Course.Model.CourseUnits;
-            await _repository.Student.UpdateAsync(StudentEditModel.ModelCopy, CancellationToken.None);
+            await Task.Run(() => _repository.Student.UpdateAsync(StudentEditModel.ModelCopy, CancellationToken.None));
             SelectedStudent.Model = StudentEditModel.ModelCopy;
-            await _repository.Grade.RemoveAsync(grademodel.Model, CancellationToken.None);
-            await _repository.Enrollment.RemoveAsync(SelectedEnrollment.Model, CancellationToken.None);
+            await Task.Run(() => _repository.Grade.RemoveAsync(grademodel.Model, CancellationToken.None));
+            await Task.Run(() => _repository.Enrollment.RemoveAsync(SelectedEnrollment.Model, CancellationToken.None));
             EnrollmentList.Remove(SelectedEnrollment);
             SelectedStudent.Enrollments.Remove(SelectedEnrollment);
         }
@@ -423,7 +424,7 @@ namespace TinyCollege.Modules
 
         private async Task LoadEnrollments()
         {
-            var enrollments = await _repository.Enrollment.GetRangeAsync(CancellationToken.None);
+            var enrollments = await Task.Run(() => _repository.Enrollment.GetRangeAsync(CancellationToken.None));
             foreach (var enrollment in enrollments )
             {
                 var enrollmentmodel = new EnrollmentModel(enrollment, _repository);

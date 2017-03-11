@@ -86,7 +86,7 @@ namespace TinyCollege.Models.Room
 
         private async Task LoadRelatedInfoAsync()
         {
-            var buildings = await _Repository.Building.GetRangeAsync(CancellationToken.None);
+            var buildings = await Task.Run(() => _Repository.Building.GetRangeAsync(CancellationToken.None));
             foreach (var building in buildings)
             {
                 BuildingList.Add(new BuildingModel(building, _Repository));

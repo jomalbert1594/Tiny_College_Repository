@@ -49,7 +49,7 @@ namespace TinyCollege.Modules
 
         private async Task LoadCoursesAsync()
         {
-            var courses = await _repository.Course.GetRangeAsync(CancellationToken.None);
+            var courses = await Task.Run(() => _repository.Course.GetRangeAsync(CancellationToken.None));
             foreach (var course in courses)
             {
                 var coursemodel = new CourseModel(course, _repository);
@@ -112,7 +112,7 @@ namespace TinyCollege.Modules
             if (!NewCourse.HasChanges) return;
             try
             {
-                await _repository.Course.AddAsync(NewCourse.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _repository.Course.AddAsync(NewCourse.ModelCopy, CancellationToken.None));
                 var courseModel = new CourseModel(NewCourse.ModelCopy, _repository);
                 courseModel.LoadRelatedInfo();
                 CourseList.Add(courseModel);
@@ -148,7 +148,7 @@ namespace TinyCollege.Modules
         {
             try
             {
-                await _repository.Course.RemoveAsync(SelecteCourse.Model, CancellationToken.None);
+                await Task.Run(() => _repository.Course.RemoveAsync(SelecteCourse.Model, CancellationToken.None));
                 CourseList.Remove(SelecteCourse);
             }
             catch (Exception e)

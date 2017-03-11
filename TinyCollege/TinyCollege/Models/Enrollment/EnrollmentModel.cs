@@ -53,18 +53,17 @@ namespace TinyCollege.Models.Enrollment
 
         private async Task LoadRelatedInfoAsync()
         {
-            var classvar = await _Repository.Class.GetAsync(c => c.ClassId == Model.ClassId, CancellationToken.None);
+            var classvar = await Task.Run(() => _Repository.Class.GetAsync(c => c.ClassId == Model.ClassId, CancellationToken.None));
             Class = new ClassModel(classvar, _Repository);
 
-            var grade =
-                await _Repository.Grade.GetAsync(g => g.EnrollmentId == Model.EnrollmentId, CancellationToken.None);
+            var grade = await Task.Run(() => _Repository.Grade.GetAsync(g => g.EnrollmentId == Model.EnrollmentId, CancellationToken.None));
             Grade = new GradeModel(grade, _Repository);
 
         }
 
         public async void LoadRelatedInfo()
         {
-            await LoadRelatedInfoAsync();
+            await Task.Run(() => LoadRelatedInfoAsync());
         }
 
 

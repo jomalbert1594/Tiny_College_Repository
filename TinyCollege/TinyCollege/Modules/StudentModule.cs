@@ -36,7 +36,7 @@ namespace TinyCollege.Modules
 
         private async Task LoadStudentAsync()
         {
-            var students = await _repository.Student.GetRangeAsync();
+            var students = await Task.Run(() => _repository.Student.GetRangeAsync());
             foreach (var student in students)
             {
                 var studentmodel = new StudentModel(student, _repository);
@@ -89,7 +89,7 @@ namespace TinyCollege.Modules
             {
                 NewStudent.Units = 0;
                 NewStudent.NoOfSubjects = 0;
-                await _repository.Student.AddAsync(NewStudent.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _repository.Student.AddAsync(NewStudent.ModelCopy, CancellationToken.None));
                 StudentList.Add(new StudentModel(NewStudent.ModelCopy, _repository));
                 _studentAddingWindow.Close();
             }

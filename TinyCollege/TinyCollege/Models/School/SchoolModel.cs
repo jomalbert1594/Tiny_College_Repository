@@ -36,7 +36,7 @@ namespace TinyCollege.Models.School
 
         private async Task LoadRelatedInfoAsync()
         {
-            var departments = await _Repository.Department.GetRangeAsync(d => d.SchoolId == Model.SchoolId, CancellationToken.None);
+            var departments =  await Task.Run(() => _Repository.Department.GetRangeAsync(d => d.SchoolId == Model.SchoolId, CancellationToken.None));
             DepartmentList.Clear();
             foreach (var department in departments)
             {
@@ -46,7 +46,7 @@ namespace TinyCollege.Models.School
                 await Task.Delay(100);
             }
 
-            var professor = await _Repository.Professor.GetAsync(p => p.ProfessorId == Model.ProfessorId, CancellationToken.None);
+            var professor = await Task.Run(() => _Repository.Professor.GetAsync(p => p.ProfessorId == Model.ProfessorId, CancellationToken.None));
             Professor = new ProfessorModel(professor, _Repository);
         }
 
@@ -89,7 +89,7 @@ namespace TinyCollege.Models.School
             if (!EditModel.HasChanges) return;
             try
             {
-                await _Repository.School.UpdateAsync(EditModel.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _Repository.School.UpdateAsync(EditModel.ModelCopy, CancellationToken.None));
                 Model = EditModel.ModelCopy;
                 IsEditing = false;
             }

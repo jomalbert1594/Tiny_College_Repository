@@ -91,32 +91,28 @@ namespace TinyCollege.Models.Class
 
         private async Task LoadrelatedInfoAsync()
         {
-            var professor =
-                await _Repository.Professor.GetAsync(p => p.ProfessorId == Model.ProfessorId, CancellationToken.None);
+            var professor = await Task.Run(() => _Repository.Professor.GetAsync(p => p.ProfessorId == Model.ProfessorId, CancellationToken.None));
             Professor = new ProfessorModel(professor, _Repository);
 
-            var room = await _Repository.Room.GetAsync(r => r.RoomId == Model.RoomId, CancellationToken.None);
+            var room = await Task.Run(() => _Repository.Room.GetAsync(r => r.RoomId == Model.RoomId, CancellationToken.None)); 
             Room = new RoomModel(room, _Repository);
 
-            var course = await _Repository.Course.GetAsync(c => c.CourseId == Model.CourseId, CancellationToken.None);
+            var course = await Task.Run(() => _Repository.Course.GetAsync(c => c.CourseId == Model.CourseId, CancellationToken.None));
             Course = new CourseModel(course, _Repository);
             Course.LoadRelatedInfo();
 
-            var enrollments =
-                await _Repository.Enrollment.GetRangeAsync(e => e.ClassId == Model.ClassId, CancellationToken.None);
+            var enrollments = await Task.Run(() => _Repository.Enrollment.GetRangeAsync(e => e.ClassId == Model.ClassId, CancellationToken.None));
             Enrollments.Clear();
 
-            var classEnrollments =
-                await _Repository.Enrollment.GetRangeAsync(c => c.ClassId == Model.ClassId, CancellationToken.None);
-                // Gets all class Enrollments involving a class
+            var classEnrollments = await Task.Run(() => _Repository.Enrollment.GetRangeAsync(c => c.ClassId == Model.ClassId, CancellationToken.None));
+            // Gets all class Enrollments involving a class
             Students.Clear();
             foreach (var enrollment in classEnrollments) // Gets all the students involving a class
             {
-                var student =
-                    await _Repository.Student.GetAsync(s => s.StudentId == enrollment.StudentId, CancellationToken.None);
+                var student = await Task.Run(() => _Repository.Student.GetAsync(s => s.StudentId == enrollment.StudentId, CancellationToken.None));
                 var studentModel = new StudentModel(student, _Repository);
                 studentModel.LoadDepartment();
-                var grade = await _Repository.Grade.GetAsync(g => g.EnrollmentId == enrollment.EnrollmentId);
+                var grade = await Task.Run(() => _Repository.Grade.GetAsync(g => g.EnrollmentId == enrollment.EnrollmentId, CancellationToken.None));
                 studentModel.Grade = new GradeModel(grade, _Repository); // Load the grade of the student
                 studentModel.Enrollment = new EnrollmentModel(enrollment, _Repository);
                 Students.Add(studentModel);

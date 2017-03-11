@@ -52,7 +52,7 @@ namespace TinyCollege.Modules
 
         private async Task LoadRoomsAsync()
         {
-            var rooms = await _repository.Room.GetRangeAsync(CancellationToken.None);
+            var rooms = await Task.Run(() => _repository.Room.GetRangeAsync(CancellationToken.None));
             foreach (var room in rooms)
             {
                 var roommodel = new RoomModel(room, _repository);
@@ -120,7 +120,7 @@ namespace TinyCollege.Modules
             if (!NewRoom.HasChanges) return;
             try
             {
-                await _repository.Room.AddAsync(NewRoom.ModelCopy);
+                await Task.Run(() => _repository.Room.AddAsync(NewRoom.ModelCopy));
                 var roommodel = new RoomModel(NewRoom.ModelCopy, _repository);
                 roommodel.LoadRelatedInfo();
                 RoomList.Add(roommodel);
@@ -166,7 +166,7 @@ namespace TinyCollege.Modules
             if (SelectedRoom == null) return;
             try
             {
-                await _repository.Room.RemoveAsync(SelectedRoom.Model, CancellationToken.None);
+                await Task.Run(() => _repository.Room.RemoveAsync(SelectedRoom.Model, CancellationToken.None));
                 RoomList.Remove(SelectedRoom);
             }
             catch (Exception e)

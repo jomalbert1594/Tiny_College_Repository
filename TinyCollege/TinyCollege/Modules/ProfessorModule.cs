@@ -34,7 +34,7 @@ namespace TinyCollege.Modules
 
         public async Task LoadProfessorsAsync()
         {
-            var professors = await _repository.Professor.GetRangeAsync(CancellationToken.None);
+            var professors = await Task.Run(() => _repository.Professor.GetRangeAsync(CancellationToken.None));
             foreach (var professor in professors)
             {
                 var professormodel = new ProfessorModel(professor, _repository);
@@ -89,7 +89,7 @@ namespace TinyCollege.Modules
             {
                 NewProfessor.CurrentUnits = 0;
                 NewProfessor.NoOfSubjects = 0;
-                await _repository.Professor.AddAsync(NewProfessor.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _repository.Professor.AddAsync(NewProfessor.ModelCopy, CancellationToken.None));
                 ProfessorList.Add(new ProfessorModel(NewProfessor.ModelCopy, _repository));
                 _professorAddingWindow.Close();
             }

@@ -37,19 +37,19 @@ namespace TinyCollege.Models.Course
         private async Task LoadRelatedInfoAsync()
         {
 
-            var department = await _Repository.Department.GetAsync(d => d.DepartmentId == Model.DepartmentId, CancellationToken.None);
+            var department = await Task.Run(() => _Repository.Department.GetAsync(d => d.DepartmentId == Model.DepartmentId, CancellationToken.None));
             Department = new DepartmentModel(department, _Repository);
 
-            var classes = await _Repository.Class.GetRangeAsync(c => c.CourseId == Model.CourseId, CancellationToken.None);
+            var classes = await Task.Run(() => _Repository.Class.GetRangeAsync(c => c.CourseId == Model.CourseId, CancellationToken.None));
             ProfessorList.Clear();
             foreach (var item in classes)
             {
                 if (item.ProfessorId == null) continue;
-                var professor = await _Repository.Professor.GetAsync(p => p.ProfessorId == item.ProfessorId, CancellationToken.None);
+                var professor = await Task.Run(() => _Repository.Professor.GetAsync(p => p.ProfessorId == item.ProfessorId, CancellationToken.None));
                 var professormodel = new ProfessorModel(professor, _Repository);
                 if (ProfessorList.Contains(professormodel)) continue;
                 var profdepartment =
-                    await _Repository.Department.GetAsync(d => d.DepartmentId == professormodel.Model.DepartmentId, CancellationToken.None);
+                    await Task.Run(() => _Repository.Department.GetAsync(d => d.DepartmentId == professormodel.Model.DepartmentId, CancellationToken.None));
                 professormodel.Model.Department = profdepartment;
                 ProfessorList.Add(new ProfessorModel(professor, _Repository));
                 await Task.Delay(100);
@@ -96,7 +96,7 @@ namespace TinyCollege.Models.Course
             if (!EditModel.HasChanges) return;
             try
             {
-                await _Repository.Course.UpdateAsync(EditModel.ModelCopy);
+                await Task.Run(() => _Repository.Course.UpdateAsync(EditModel.ModelCopy));
                 Model = EditModel.ModelCopy;
                 LoadRelatedInfo();
                 IsEditing = false;

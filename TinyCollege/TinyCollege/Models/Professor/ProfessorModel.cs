@@ -81,10 +81,10 @@ namespace TinyCollege.Models.Professor
 
         private async Task LoadRelatedInfoAsync()
         {
-            var department = await _Repository.Department.GetAsync(d => d.DepartmentId == Model.DepartmentId, CancellationToken.None);
+            var department = await Task.Run(() => _Repository.Department.GetAsync(d => d.DepartmentId == Model.DepartmentId, CancellationToken.None));
             Department = new DepartmentModel(department, _Repository);
 
-            var classes = await _Repository.Class.GetRangeAsync(c => c.ProfessorId == Model.ProfessorId, CancellationToken.None);
+            var classes = await Task.Run(() => _Repository.Class.GetRangeAsync(c => c.ProfessorId == Model.ProfessorId, CancellationToken.None));
             Classes.Clear();
             foreach (var item in classes)
             {
@@ -94,10 +94,10 @@ namespace TinyCollege.Models.Professor
                 await Task.Delay(100);
             }
 
-            var student = await _Repository.Student.GetAsync(s => s.ProfessorId == Model.ProfessorId, CancellationToken.None);
+            var student = await Task.Run(() => _Repository.Student.GetAsync(s => s.ProfessorId == Model.ProfessorId, CancellationToken.None));
             Student = new StudentModel(student, _Repository);
 
-            var school = await _Repository.School.GetAsync(s => s.ProfessorId == Model.ProfessorId, CancellationToken.None);
+            var school = await Task.Run(() => _Repository.School.GetAsync(s => s.ProfessorId == Model.ProfessorId, CancellationToken.None));
             School = new SchoolModel(school, _Repository);
         }
 
@@ -153,7 +153,7 @@ namespace TinyCollege.Models.Professor
 
             try
             {
-                await _Repository.Professor.UpdateAsync(EditModel.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _Repository.Professor.UpdateAsync(EditModel.ModelCopy, CancellationToken.None));
                 Model = EditModel.ModelCopy;
                 IsEditing = false;
             }

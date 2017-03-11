@@ -81,11 +81,11 @@ namespace TinyCollege.Models.School
 
         private async Task LoadRelatedInfoAsync()
         {
-            var departments = await _Repository.Department.GetRangeAsync(d => d.SchoolId == ModelCopy.SchoolId, CancellationToken.None);
+            var departments = await Task.Run(() => _Repository.Department.GetRangeAsync(d => d.SchoolId == ModelCopy.SchoolId, CancellationToken.None));
             ProfessorList.Clear();
             foreach (var department in departments)
             {
-                var professors = await _Repository.Professor.GetRangeAsync(p => p.DepartmentId == department.DepartmentId, CancellationToken.None);
+                var professors = await Task.Run(() => _Repository.Professor.GetRangeAsync(p => p.DepartmentId == department.DepartmentId, CancellationToken.None));
                 foreach (var professor in professors.Where(p => p.IsSchoolHead == false))
                 {
                     var professormodel = new ProfessorModel(professor, _Repository);

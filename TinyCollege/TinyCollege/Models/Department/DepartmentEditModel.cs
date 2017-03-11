@@ -85,17 +85,17 @@ namespace TinyCollege.Models.Department
 
         private async Task LoadRelatedInfoAsync()
         {
-            var schools = await _Repository.School.GetRangeAsync(CancellationToken.None);
+            var schools = await Task.Run(() => _Repository.School.GetRangeAsync(CancellationToken.None));
             foreach (var school in schools)
             {
                 var schoolmodel = new SchoolModel(school, _Repository);
-                var professor = await _Repository.Professor.GetAsync(p => p.ProfessorId == schoolmodel.Model.ProfessorId, CancellationToken.None);
+                var professor = await Task.Run(() => _Repository.Professor.GetAsync(p => p.ProfessorId == schoolmodel.Model.ProfessorId, CancellationToken.None));
                 schoolmodel.Professor = new ProfessorModel(professor, _Repository);
                 SchoolList.Add(schoolmodel);
                 await Task.Delay(100);
             }
 
-            var professors = await _Repository.Professor.GetRangeAsync(p => p.DepartmentId == ModelCopy.DepartmentId, CancellationToken.None); // Load the professors in that particular department
+            var professors = await Task.Run(() => _Repository.Professor.GetRangeAsync(p => p.DepartmentId == ModelCopy.DepartmentId, CancellationToken.None));
             foreach (var professor in professors.Where(p => p.IsDepartmentHead == false))
             {
                 var professormodel = new ProfessorModel(professor, _Repository);

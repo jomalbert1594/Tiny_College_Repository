@@ -165,7 +165,7 @@ namespace TinyCollege.Modules
 
             try
             {
-                await _repository.Professor.RemoveAsync(SelectedProfessor.Model, CancellationToken.None);
+                await Task.Run(() => _repository.Professor.RemoveAsync(SelectedProfessor.Model, CancellationToken.None));
                 ViewModelLocatorStatic.Locator.ProfessorModule.ProfessorList.Remove(SelectedProfessor);
             }
             catch (Exception e)
@@ -246,7 +246,7 @@ namespace TinyCollege.Modules
                 var nextStudent = 0;
                 foreach (var grade in SelectedClass.EditClassesGrades)
                 {
-                    await _repository.Grade.UpdateAsync(grade.ModelCopy, CancellationToken.None);
+                    await Task.Run(() => _repository.Grade.UpdateAsync(grade.ModelCopy, CancellationToken.None));
                     SelectedClass.Students[nextStudent].Grade.Model = grade.ModelCopy;
                     nextStudent++;
                 }
@@ -319,8 +319,8 @@ namespace TinyCollege.Modules
 
                 ClassList.Add(SelectedClass);
                 SelectedClass.LoadRelatedInfo();
-                await _repository.Class.UpdateAsync(SelectedClass.Model,CancellationToken.None);
-                await _repository.Professor.UpdateAsync(ProfessorEditModel.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _repository.Class.UpdateAsync(SelectedClass.Model, CancellationToken.None));
+                await Task.Run(() => _repository.Professor.UpdateAsync(ProfessorEditModel.ModelCopy, CancellationToken.None));
                 SelectedProfessor.Model = ProfessorEditModel.ModelCopy;
                 IdleClassList.Remove(SelectedClass);
                 SelectedProfessor.LoadRelatedInfo();
@@ -353,9 +353,9 @@ namespace TinyCollege.Modules
             ClassEditModel = new ClassEditModel(SelectedClass.Model) { ProfessorId = null };
             ProfessorEditModel.CurrentUnits = ProfessorEditModel.CurrentUnits - SelectedClass.Course.Model.CourseUnits;
             ProfessorEditModel.NoOfSubjects = ProfessorEditModel.NoOfSubjects - 1;
-            await _repository.Professor.UpdateAsync(ProfessorEditModel.ModelCopy, CancellationToken.None);
+            await Task.Run(() => _repository.Professor.UpdateAsync(ProfessorEditModel.ModelCopy, CancellationToken.None));
             SelectedProfessor.Model = ProfessorEditModel.ModelCopy;
-            await _repository.Class.UpdateAsync(ClassEditModel.ModelCopy, CancellationToken.None);
+            await Task.Run(() => _repository.Class.UpdateAsync(ClassEditModel.ModelCopy, CancellationToken.None)); 
             SelectedClass.Model = ClassEditModel.ModelCopy;
             SelectedProfessor.Classes.Remove(SelectedClass);
         }
@@ -401,7 +401,7 @@ namespace TinyCollege.Modules
             {
                 GenerateSchedule();
                 if (IsThereAConflict()) return;
-                await _repository.Class.AddAsync(NewClass.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _repository.Class.AddAsync(NewClass.ModelCopy, CancellationToken.None)); 
                 var newclass = new ClassModel(NewClass.ModelCopy, _repository);
                 newclass.LoadRelatedInfo();
                 ModuleClassList.Add(newclass);
@@ -645,7 +645,7 @@ namespace TinyCollege.Modules
 
         private async Task LoadModuleClassAsync()
         {
-            var classes = await _repository.Class.GetRangeAsync(CancellationToken.None);
+            var classes = await Task.Run(() => _repository.Class.GetRangeAsync(CancellationToken.None));
 
             foreach (var item in classes)
             {
@@ -666,7 +666,7 @@ namespace TinyCollege.Modules
         public async Task LoadClassesAsync()
         {
             LoadModuleClass();
-            var classes = await _repository.Class.GetRangeAsync(CancellationToken.None);
+            var classes = await Task.Run(() => _repository.Class.GetRangeAsync(CancellationToken.None));
             foreach (var item in classes.Where(i => i.ProfessorId != null))
             {
                 var itemclass = new ClassModel(item, _repository);
@@ -675,7 +675,7 @@ namespace TinyCollege.Modules
                 await Task.Delay(100);
             } 
 
-            var idleclasses  = await _repository.Class.GetRangeAsync(i => i.ProfessorId == null, CancellationToken.None);
+            var idleclasses  = await Task.Run(() => _repository.Class.GetRangeAsync(i => i.ProfessorId == null, CancellationToken.None));
             foreach (var item in idleclasses)
             {
                 var itemclass = new ClassModel(item, _repository);

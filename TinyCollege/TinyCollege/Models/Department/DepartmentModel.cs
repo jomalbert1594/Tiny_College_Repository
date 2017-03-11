@@ -53,14 +53,14 @@ namespace TinyCollege.Models.Department
 
         private async Task LoadRelatedInfoAsync()
         {
-            var school = await _Repository.School.GetAsync(s => s.SchoolId == Model.SchoolId, CancellationToken.None);
+            var school = await Task.Run(() => _Repository.School.GetAsync(s => s.SchoolId == Model.SchoolId, CancellationToken.None));
             School = new SchoolModel(school, _Repository);
 
-            var departmenthead = await _Repository.Professor.GetAsync(p => p.DepartmentId == Model.DepartmentId && p.IsDepartmentHead, CancellationToken.None);
+            var departmenthead = await Task.Run(() => _Repository.Professor.GetAsync(p => p.DepartmentId == Model.DepartmentId && p.IsDepartmentHead, CancellationToken.None));
             DepartmentHead = new ProfessorModel(departmenthead, _Repository);
 
             var professors =
-                await _Repository.Professor.GetRangeAsync(p => p.DepartmentId == Model.DepartmentId && !p.IsDepartmentHead, CancellationToken.None);
+                await Task.Run(() => _Repository.Professor.GetRangeAsync(p => p.DepartmentId == Model.DepartmentId && !p.IsDepartmentHead, CancellationToken.None));
             Professors.Clear();
             foreach (var professor in professors)
             {
@@ -68,7 +68,7 @@ namespace TinyCollege.Models.Department
                 await Task.Delay(100);
             }
 
-            var students = await _Repository.Student.GetRangeAsync(s => s.DepartmentId == Model.DepartmentId, CancellationToken.None);
+            var students = await Task.Run(() => _Repository.Student.GetRangeAsync(s => s.DepartmentId == Model.DepartmentId, CancellationToken.None));
             Students.Clear();
             foreach (var student in students)
             {
@@ -133,7 +133,7 @@ namespace TinyCollege.Models.Department
 
                 if (Model.ProfessorId != null)
                 {
-                    var previousHead = await _Repository.Professor.GetAsync(p => p.ProfessorId == Model.ProfessorId, CancellationToken.None);
+                    var previousHead = await Task.Run(() => _Repository.Professor.GetAsync(p => p.ProfessorId == Model.ProfessorId, CancellationToken.None));
                     var previousHeadModel =
                         ViewModelLocatorStatic.Locator.ProfessorModule.ProfessorList.FirstOrDefault(
                             p => p.Model.ProfessorId == Model.ProfessorId);
@@ -143,14 +143,14 @@ namespace TinyCollege.Models.Department
                         IsSchoolHead = false
                     };
 
-                    await _Repository.Professor.UpdateAsync(previousHeadEditModel.ModelCopy, CancellationToken.None);
+                    await Task.Run(() => _Repository.Professor.UpdateAsync(previousHeadEditModel.ModelCopy, CancellationToken.None)); 
                     previousHeadModel.Model = previousHeadEditModel.ModelCopy;
 
                 }
 
                 try
                 {
-                    var professor = await _Repository.Professor.GetAsync(p => p.ProfessorId == EditModel.ModelCopy.ProfessorId, CancellationToken.None);
+                    var professor = await Task.Run(() => _Repository.Professor.GetAsync(p => p.ProfessorId == EditModel.ModelCopy.ProfessorId, CancellationToken.None));
                     var headModel = ViewModelLocatorStatic.Locator.ProfessorModule.ProfessorList.FirstOrDefault(p => p.Model.ProfessorId == professor.ProfessorId);
                     ProfessorEditModel = new ProfessorEditModel(professor)
                     {
@@ -159,12 +159,12 @@ namespace TinyCollege.Models.Department
                         IsDepartmentHead = true
                     };
                     headModel.Model = ProfessorEditModel.ModelCopy;
-                    await _Repository.Professor.UpdateAsync(headModel.Model, CancellationToken.None);
+                    await Task.Run(() => _Repository.Professor.UpdateAsync(headModel.Model, CancellationToken.None));
                 }
                 catch (Exception e) { }
 
 
-                await _Repository.Department.UpdateAsync(EditModel.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _Repository.Department.UpdateAsync(EditModel.ModelCopy, CancellationToken.None));
                 Model = EditModel.ModelCopy;
                 LoadRelatedInfo();
                 IsEditing = false;

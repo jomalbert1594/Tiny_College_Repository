@@ -46,7 +46,7 @@ namespace TinyCollege.Modules
 
         private async Task LoadSchoolsAsync()
         {
-            var schools = await _repository.School.GetRangeAsync(CancellationToken.None);
+            var schools = await Task.Run(() => _repository.School.GetRangeAsync(CancellationToken.None));
             SchoolList.Clear();
             foreach (var school in schools)
             {
@@ -108,12 +108,12 @@ namespace TinyCollege.Modules
                         }
                         professormodel.Model = NewSchool.Professor.Model;
                         professormodel.Model.IsSchoolHead = true;
-                        await _repository.Professor.UpdateAsync(professormodel.Model, CancellationToken.None);
+                        await Task.Run(() => _repository.Professor.UpdateAsync(professormodel.Model, CancellationToken.None));
                     }
                 }
                 catch (Exception e) { }
 
-                await _repository.School.AddAsync(NewSchool.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _repository.School.AddAsync(NewSchool.ModelCopy, CancellationToken.None));
                 SchoolList.Add(new SchoolModel(NewSchool.ModelCopy, _repository));
                 _schooAddingWind.Close();
             }
@@ -153,10 +153,10 @@ namespace TinyCollege.Modules
                 if (professormodel != null)
                 {
                     professormodel.IsSchoolHead = false;
-                    await _repository.Professor.UpdateAsync(professormodel, CancellationToken.None);
+                    await Task.Run(() => _repository.Professor.UpdateAsync(professormodel, CancellationToken.None));
                 }
 
-                await _repository.School.RemoveAsync(SelectedSchool.Model, CancellationToken.None);
+                await Task.Run(() => _repository.School.RemoveAsync(SelectedSchool.Model, CancellationToken.None));
                 SchoolList.Remove(SelectedSchool);
             }
             catch (Exception e)
