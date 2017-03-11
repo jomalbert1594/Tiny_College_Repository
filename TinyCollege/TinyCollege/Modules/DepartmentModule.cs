@@ -126,9 +126,10 @@ namespace TinyCollege.Modules
             }
         }
 
-        private async void SaveDepartmentProc()
+        private void SaveDepartmentProc()
         {
-            await SaveDepartmentProcAsync();
+            NotifyTaskCompletion.Create(() => SaveDepartmentProcAsync());
+
         }
 
         public ICommand DeleteDepartmentCommand => new RelayCommand(DeleteDepartmentProc, DeleteDepartmentCondition);
@@ -154,7 +155,8 @@ namespace TinyCollege.Modules
 
         private async void DeleteDepartmentProc()
         {
-            await DeleteDepartmentProcAsync();
+            NotifyTaskCompletion.Create(() => DeleteDepartmentProcAsync());
+
         }
 
         public ICommand CancelDepartmentCommand => new RelayCommand(CancelDepartmentProc);

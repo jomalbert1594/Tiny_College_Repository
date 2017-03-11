@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
+using Nito.AsyncEx;
 using TinyCollege.DataAccess;
 using TinyCollege.Models.Building;
 using TinyCollege.Models.Class;
@@ -52,7 +53,8 @@ namespace TinyCollege.Models.Room
 
         public async void LoadRelatedInfo()
         {
-            await LoadRelatedInfoAsync();
+            NotifyTaskCompletion.Create(() => LoadRelatedInfoAsync());
+
         }
 
         private bool _isEditing;
@@ -100,9 +102,9 @@ namespace TinyCollege.Models.Room
             }
         }
 
-        private async void SaveProc()
+        private void SaveProc()
         {
-            await SaveProcAsync();
+            NotifyTaskCompletion.Create(() => SaveProcAsync());
         }
 
         public ICommand EditCommand => new RelayCommand(EditProc);

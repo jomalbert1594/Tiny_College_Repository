@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using Nito.AsyncEx;
 using TinyCollege.DataAccess;
 using TinyCollege.Models.Department;
 
@@ -209,7 +210,8 @@ namespace TinyCollege.Models.Student
 
         private async void LoadDepartment()
         {
-            await LoadDepartmentAsync();
+            NotifyTaskCompletion.Create(() => LoadDepartmentAsync());
+
         }
     }
 }

@@ -123,9 +123,9 @@ namespace TinyCollege.Modules
             }
         }
 
-        private async void SaveSchoolProc()
+        private void SaveSchoolProc()
         {
-            await SaveSchoolProcAsync();
+            NotifyTaskCompletion.Create(() => SaveSchoolProcAsync());
         }
 
         public ICommand CancelSchoolCommand => new RelayCommand(CancelSchoolProc);
@@ -165,9 +165,9 @@ namespace TinyCollege.Modules
             }
         }
 
-        private async void DeleteSchoolProc()
+        private void DeleteSchoolProc()
         {
-            await DeleteSchoolProcAsync();
+            NotifyTaskCompletion.Create(() => DeleteSchoolProcAsync());
         }
     }
 }

@@ -154,9 +154,10 @@ namespace TinyCollege.Modules
             return (SelectedProfessor != null);
         }
 
-        private async void DeleteProfProc()
+        private void DeleteProfProc()
         {
-            await DeleteProfProcAsync();
+            NotifyTaskCompletion.Create(() => DeleteProfProcAsync());
+
         }
 
         private async Task DeleteProfProcAsync()
@@ -260,7 +261,8 @@ namespace TinyCollege.Modules
 
         private async void SaveStudentGradeProc()
         {
-            await SaveStudentGradeProcAsync();
+            NotifyTaskCompletion.Create(() => SaveStudentGradeProcAsync());
+
         }
 
         public ICommand cancelStudentGradeCommand => new RelayCommand(CancelEditStudentGradesProc);
@@ -333,9 +335,10 @@ namespace TinyCollege.Modules
             }
         }
 
-        private async void SaveProfessorClassProc()
+        private void SaveProfessorClassProc()
         {
-            await SaveProfessorClassProcAsync();
+            NotifyTaskCompletion.Create(() => SaveProfessorClassProcAsync());
+
         }
 
         public ICommand DeleteProfessorClassCommand => new RelayCommand(DeleteProfessorClassProc, DeleteProfessorClassCondition);
@@ -414,9 +417,9 @@ namespace TinyCollege.Modules
             }
         }
 
-        private async void SaveClassProc()
+        private void SaveClassProc()
         {
-            await SaveClassProcAsync();
+            NotifyTaskCompletion.Create(() => SaveClassProcAsync());
         }
 
         private bool IsProfessorScheduleConflict()
@@ -656,9 +659,9 @@ namespace TinyCollege.Modules
             }
         }
 
-        private async void LoadModuleClass()
+        private void LoadModuleClass()
         {
-            await LoadModuleClassAsync();
+            NotifyTaskCompletion.Create(() => LoadModuleClassAsync());
         }
 
         public INotifyTaskCompletion ClassLoading { get; set; }

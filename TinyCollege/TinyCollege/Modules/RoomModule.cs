@@ -131,9 +131,10 @@ namespace TinyCollege.Modules
                 MessageBox.Show("Unable to Save!", "Add Room", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
-        private async void SaveRoomProc()
+        private void SaveRoomProc()
         {
-            await SaveRoomProcAsync();
+            NotifyTaskCompletion.Create(() => SaveRoomProcAsync());
+
         }
 
         public ICommand CancelRoomCommand => new RelayCommand(CancelRoomProc);
@@ -175,9 +176,10 @@ namespace TinyCollege.Modules
             }
         }
 
-        private async void DeleteRoomProc()
+        private void DeleteRoomProc()
         {
-            await DeleteRoomProcAsync();
+            NotifyTaskCompletion.Create(() => DeleteRoomProcAsync());
+
         }
     }
 }

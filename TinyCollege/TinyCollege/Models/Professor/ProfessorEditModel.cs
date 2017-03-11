@@ -6,6 +6,7 @@ using System.Management.Instrumentation;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Nito.AsyncEx;
 using TinyCollege.DataAccess;
 using TinyCollege.Models.Department;
 
@@ -201,7 +202,8 @@ namespace TinyCollege.Models.Professor
 
         private async void LoadDepartments()
         {
-            await LoadDepartmentsAsync();
+            NotifyTaskCompletion.Create(() => LoadDepartmentsAsync());
+
         }
 
         private DepartmentModel _department;

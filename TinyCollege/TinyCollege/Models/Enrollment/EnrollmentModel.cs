@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using Nito.AsyncEx;
 using TinyCollege.DataAccess;
 using TinyCollege.Models.Class;
 using TinyCollege.Models.Grade;
@@ -115,7 +116,8 @@ namespace TinyCollege.Models.Enrollment
         }
         private async void SaveProc()
         {
-            await SaveProcASync();
+            NotifyTaskCompletion.Create(() => SaveProcASync());
+
         }
 
         public ICommand EditCommand => new RelayCommand(EditProc);

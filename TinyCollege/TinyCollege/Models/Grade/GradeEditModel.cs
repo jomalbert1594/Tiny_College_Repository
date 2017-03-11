@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Nito.AsyncEx;
 using TinyCollege.DataAccess;
 using TinyCollege.Models.Student;
 
@@ -63,11 +64,12 @@ namespace TinyCollege.Models.Grade
             Student = new StudentModel(student, _Repository);
         }
 
-        private async void LoadRelatedInfo()
+        private void LoadRelatedInfo()
         {
-            await LoadRelatedInfoAsync();
+            NotifyTaskCompletion.Create(() => LoadRelatedInfoAsync());
+
         }
-              
+
 
         // Editing Purposes
         public int GradeId

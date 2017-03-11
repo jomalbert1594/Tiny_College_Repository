@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Nito.AsyncEx;
 using TinyCollege.DataAccess;
 using TinyCollege.Models.Class;
 using TinyCollege.Models.Course;
@@ -59,9 +60,9 @@ namespace TinyCollege.Models.Grade
             Class.LoadRelatedInfo();
         }
 
-        public async void LoadRelatedInfo()
+        public  void LoadRelatedInfo()
         {
-            await LoadRelatedInfoAsync();
+            NotifyTaskCompletion.Create(() => LoadRelatedInfoAsync());
         }
 
         private bool _isEditing;
@@ -94,13 +95,13 @@ namespace TinyCollege.Models.Grade
             return (EditModel != null);
         }
 
-        private void SaveProc()
+        private async Task SaveProcAaync()
         {
             if (EditModel == null) return;
 
             try
             {
-                _Repository.Grade.UpdateAsync(EditModel.ModelCopy, CancellationToken.None);
+                await Task.Run(() => _Repository.Grade.UpdateAsync(EditModel.ModelCopy, CancellationToken.None)); 
                 Model = EditModel.ModelCopy;
                 _isEditing = false;
             }
@@ -108,6 +109,10 @@ namespace TinyCollege.Models.Grade
             {
                 MessageBox.Show("Unable To Save!", "Edit Grade", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void SaveProc()
+        {
+            NotifyTaskCompletion.Create(() => SaveProcAaync());
         }
 
         public ICommand EditCommand => new RelayCommand(EditProc);

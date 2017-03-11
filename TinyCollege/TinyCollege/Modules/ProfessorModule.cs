@@ -98,9 +98,10 @@ namespace TinyCollege.Modules
                 MessageBox.Show("Unable to Save!", "Add Professor");
             }
         }
-        private async void SaveProfProc()
+        private void SaveProfProc()
         {
-            await SaveProfProcAsync();
+            NotifyTaskCompletion.Create(() => SaveProfProcAsync());
+
         }
 
         public ICommand CancelProfCommand => new RelayCommand(CancelProcProf);

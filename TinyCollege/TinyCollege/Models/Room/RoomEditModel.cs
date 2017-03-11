@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using Nito.AsyncEx;
 using TinyCollege.DataAccess;
 using TinyCollege.Models.Building;
 
@@ -94,9 +95,10 @@ namespace TinyCollege.Models.Room
             }
         }
 
-        private async void LoadRelatedInfo()
+        private void LoadRelatedInfo()
         {
-            await LoadRelatedInfoAsync();
+            NotifyTaskCompletion.Create(() => LoadRelatedInfoAsync());
+
         }
     }
 }

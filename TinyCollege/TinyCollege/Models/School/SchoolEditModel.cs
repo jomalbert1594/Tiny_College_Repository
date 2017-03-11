@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Nito.AsyncEx;
 using TinyCollege.DataAccess;
 using TinyCollege.Models.Professor;
 
@@ -99,7 +100,8 @@ namespace TinyCollege.Models.School
 
         private async void LoadRelatedInfo()
         {
-            await LoadRelatedInfoAsync();
+            NotifyTaskCompletion.Create(() => LoadRelatedInfoAsync());
+
         }
 
         public ObservableCollection<ProfessorModel> ProfessorList { get; } = new ObservableCollection<ProfessorModel>();

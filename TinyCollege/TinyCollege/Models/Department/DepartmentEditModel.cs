@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Nito.AsyncEx;
 using TinyCollege.DataAccess;
 using TinyCollege.Models.Professor;
 using TinyCollege.Models.School;
@@ -105,9 +106,10 @@ namespace TinyCollege.Models.Department
             }
         }
 
-        private async void LoadRelatedInfo()
+        private void LoadRelatedInfo()
         {
-            await LoadRelatedInfoAsync();
+            NotifyTaskCompletion.Create(() => LoadRelatedInfoAsync());
+
         }
 
         private SchoolModel _school;

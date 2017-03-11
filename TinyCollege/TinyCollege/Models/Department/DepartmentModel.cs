@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
+using Nito.AsyncEx;
 using TinyCollege.DataAccess;
 using TinyCollege.Models.Enrollment;
 using TinyCollege.Models.Professor;
@@ -77,11 +78,12 @@ namespace TinyCollege.Models.Department
             }
         }
 
-        public async void LoadRelatedInfo()
+        public void LoadRelatedInfo()
         {
-            await LoadRelatedInfoAsync();
+            NotifyTaskCompletion.Create(() => LoadRelatedInfoAsync());
+
         }
-        
+
         private bool _isEditing;
         public bool IsEditing
         {
@@ -175,9 +177,10 @@ namespace TinyCollege.Models.Department
             }
         }
         
-        private async void SaveProc()
+        private void SaveProc()
         {
-            await SaveProcAsync();
+            NotifyTaskCompletion.Create(() => SaveProcAsync());
+
         }
 
         public ICommand EditCommand => new RelayCommand(EditProc);

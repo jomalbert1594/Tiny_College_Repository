@@ -101,11 +101,12 @@ namespace TinyCollege.Models.Professor
             School = new SchoolModel(school, _Repository);
         }
 
-        public async void LoadRelatedInfo()
+        public void LoadRelatedInfo()
         {
-            await LoadRelatedInfoAsync();
+            NotifyTaskCompletion.Create(() => LoadRelatedInfoAsync());
+
         }
-      
+
         private bool _isEditing;
         public bool IsEditing
         {
@@ -165,7 +166,8 @@ namespace TinyCollege.Models.Professor
 
         private async void SaveProc()
         {
-            await SaveProcAsync();
+            NotifyTaskCompletion.Create(() => SaveProcAsync());
+
         }
 
         public ICommand EditCommand => new RelayCommand(EditProc);

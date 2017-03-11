@@ -141,9 +141,10 @@ namespace TinyCollege.Modules
 
         }
 
-        private async void DeleteStudentProc()
+        private void DeleteStudentProc()
         {
-            await DeleteStudentProcAsync();
+            NotifyTaskCompletion.Create(() => DeleteStudentProcAsync());
+
         }
 
         public ICommand SaveStudentEnrollmentCommand => new RelayCommand(SaveStudentEnrollmentProc, SaveStudentEnrollmentCondition);
@@ -218,9 +219,10 @@ namespace TinyCollege.Modules
 
         }
 
-        private async void SaveStudentEnrollmentProc()
+        private void SaveStudentEnrollmentProc()
         {
-            await SaveStudentEnrollmentProcAsync();
+            NotifyTaskCompletion.Create(() => SaveStudentEnrollmentProcAsync());
+
         }
 
         private bool IsThereAlreadyAMajorSubject()
@@ -363,9 +365,10 @@ namespace TinyCollege.Modules
             SelectedStudent.Enrollments.Remove(SelectedEnrollment);
         }
 
-        private async void DeleteEnrollmentProc()
+        private void DeleteEnrollmentProc()
         {
-            await DeleteEnrollmentProcAsync();
+            NotifyTaskCompletion.Create(() => DeleteEnrollmentProcAsync());
+
         }
 
         public ICommand CancelSaveEnrollmentCommand => new RelayCommand(CancelSaveEnrollmenetProc);

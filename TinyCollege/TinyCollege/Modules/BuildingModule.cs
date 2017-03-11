@@ -106,9 +106,10 @@ namespace TinyCollege.Modules
             }
 
         }
-        private async void SaveBuildingProc()
+        private void SaveBuildingProc()
         {
-            await SaveBuildingProcAsync();
+            NotifyTaskCompletion.Create(() => SaveBuildingProcAsync());
+
         }
 
         public ICommand CancelBuildingCommand => new RelayCommand(CancelBuildingProc);
@@ -139,9 +140,9 @@ namespace TinyCollege.Modules
                 MessageBox.Show("Unable to Delete", "Delete Building", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
-        private async void DelteBuildingProc()
+        private void DelteBuildingProc()
         {
-            await DeleteBuildingProcAsync();
+            NotifyTaskCompletion.Create(() => DeleteBuildingProcAsync());
         }
     }
 }
