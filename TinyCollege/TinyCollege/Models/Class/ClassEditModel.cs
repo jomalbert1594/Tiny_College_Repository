@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Nito.AsyncEx;
 using TinyCollege.DataAccess;
 using TinyCollege.Models.Course;
 using TinyCollege.Models.Professor;
@@ -148,9 +149,9 @@ namespace TinyCollege.Models.Class
             }
         }
 
-        private async void LoadRelatedInfo()
+        private void LoadRelatedInfo()
         {
-            await LoadRelatedInfoAsync();
+            NotifyTaskCompletion.Create(() => LoadRelatedInfoAsync());
         }
 
         public ObservableCollection<RoomModel> RoomList { get; } = new ObservableCollection<RoomModel>();

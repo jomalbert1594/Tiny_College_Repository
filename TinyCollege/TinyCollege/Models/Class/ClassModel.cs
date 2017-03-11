@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Reporting.WebForms;
+using Nito.AsyncEx;
 using TinyCollege.DataAccess;
 using TinyCollege.Models.Course;
 using TinyCollege.Models.Enrollment;
@@ -127,9 +128,9 @@ namespace TinyCollege.Models.Class
 
         }
 
-        public async void LoadRelatedInfo()
+        public void LoadRelatedInfo()
         {
-            await LoadrelatedInfoAsync();
+            NotifyTaskCompletion.Create(() => LoadrelatedInfoAsync());
         }
 
         // Attributes
@@ -185,7 +186,7 @@ namespace TinyCollege.Models.Class
 
         private async void SaveProc()
         {
-            await SaveProcAsync();
+            NotifyTaskCompletion.Create(() => SaveProcAsync());
         }
 
         public ICommand EditCommand => new RelayCommand(EditProc);
